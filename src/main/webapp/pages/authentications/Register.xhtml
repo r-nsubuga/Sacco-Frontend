@@ -8,6 +8,9 @@
 <h:head>
     <style>
         .logo-image {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
             width: 100px;
             height: 100px; 
         }
@@ -43,13 +46,17 @@
                     <p:outputLabel for="float-input" value="Username:"/><br/>
                     <p:inputText id="float-input" required="true"/>
                 </div>
-                <div class="form-group">
-                    <p:outputLabel for="float-console" value="Gender:"/>
-                        <p:selectOneRadio id="float-console" style="text-align: center;">
-                            <f:selectItem itemLabel="Male" itemValue="Male"/>
-                            <f:selectItem itemLabel="Female" itemValue="Female"/>
-                        </p:selectOneRadio>
-                </div>
+                    <p:outputLabel value="Gender:"/><br/>
+                    <p:selectOneMenu id="option" value="#{selectOneMenuView.selectedOption}">
+                    <f:selectItem itemLabel="Select One" itemValue=""/>
+                    <f:selectItem itemLabel="Male" itemValue="Male"/>
+                    <f:selectItem itemLabel="Female" itemValue="Female"/>
+                    <f:facet name="footer">
+                        <p:divider styleClass="mt-0" />
+                        <h:outputText value="2 options" style="font-weight:bold;"/>
+                    </f:facet>
+                </p:selectOneMenu>
+                    
                 <div class="form-group">
                     <p:outputLabel for="float-email" value="Email:"/><br/>
                     <p:inputText id="float-email" required="true"/>
