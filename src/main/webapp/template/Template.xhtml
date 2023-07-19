@@ -10,7 +10,15 @@
 
 
 <f:view>
-    <h:outputLabel value="Hello, world"/>
+    <ui:insert name="header">
+        <ui:include src="/template/Header.xhtml" />
+    </ui:insert>
+    <ui:insert name="nav">
+        <ui:include src="/template/Navbar.xhtml" />
+    </ui:insert>
+    <ui:insert name="footer">
+        <ui:include src="/template/Footer.xhtml" />
+    </ui:insert>
 </f:view>
 </html>
 

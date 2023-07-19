@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+
+<h:head>
+    <f:facet name="first">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+
+        <h:outputStylesheet name="primeflex/3.3.1/primeflex.css" library="webjars"/>
+        <h:outputStylesheet name="css/App.css"/>
+    </f:facet>
+   
+</h:head>
+<h:body>
+    <div >
+        <ui:include src="/template/Header.xhtml" />
+    </div>
+    <div >
+        <ui:include src="/template/Navbar.xhtml" />
+    </div>
+
+    <div class="card">
+        <p:card>
+            <div class="watermark-container">
+                <div class="card-container">
+                    <p:card title="Financial Management" id="watermarkTarget" style="background-color: white;">
+                        <p>
+                            Budgeting and Financial Management are essential for a SACCO and members are able to efficiently to risk management.
+                        </p>
+                    </p:card>
+
+                    <p:card title="Savings" style="background-color:burlywood;">
+                        <p>Getting introduced to the habit of saving to make better plans and ensure financial independence</p>
+                        <!-- Card 2 content here -->
+                    </p:card>
+
+                    <p:card title="Loans" style="background-color:white;">
+                        <p>Members get loans at friendly rates. Loans are instant and paid with consideration.</p>
+                        <!-- Card 3 content here -->
+                    </p:card>
+
+                    <p:card title="Business Advice" style="background-color:burlywood">
+                        <p>Advice from the different members of the SACCO to queries raised in the Kimwanyi Sacco Forum</p>
+                        <!-- Card 4 content here -->
+                    </p:card>
+                </div>
+            </div>
+            <!-- Add more content here -->
+        </p:card>
+    </div>
+
+    <div class="footer" style="background-color: lightgreen;">
+        <ui:include src="/template/Footer.xhtml" />
+    </div>
+
+</h:body>
+</html>

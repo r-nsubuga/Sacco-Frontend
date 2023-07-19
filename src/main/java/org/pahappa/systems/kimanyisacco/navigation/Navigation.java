@@ -15,6 +15,12 @@ public class Navigation {
 
     private final String landing = "/pages/landing/Landing.xhtml";
 
+    private final String login = "/pages/authentications/LoginForm.xhtml";
+
+    public String getLogin() {
+        return login;
+    }
+
     public String getDashboard() {
         return dashboard;
     }

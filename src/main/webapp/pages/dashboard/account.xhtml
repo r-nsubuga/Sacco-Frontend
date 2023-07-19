@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+
+<h:head>
+    <f:facet name="first">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+
+        <h:outputStylesheet name="primeflex/3.3.1/primeflex.css" library="webjars"/>
+        <link rel="stylesheet" type="text/css" href="resources/css/App.css"/>
+    </f:facet>
+    <style>
+        /* CARD CONTAINER */
+      
+        .card--container{
+  background: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 4px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  left: 250px;
+  width: 1000px;
+}
+#userTable{
+    width:fit-content;
+}
+.card--wrapper{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.main--title{
+  color: rgba(113, 99, 186, 255);
+  padding-bottom: 10px;
+  font-size: 15px;
+}
+.payment--card{
+  background: rgb(229, 223, 233);
+  border-radius: 10px;
+  padding: 1.2rem;
+  width: 290px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.5s ease-in-out;
+}
+.payment--card:hover{
+  transform: translateY(-5px);
+}
+.card--header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.amount{
+  display: flex;
+  flex-direction: column;
+}
+.title{
+  font-size: 12px;
+  font-weight: 200;
+}
+.amount--value{
+  font-size: 24px;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 600;
+}
+.icon{
+  color: #fff;
+  padding: 0.8rem;
+  height: 60px;
+  width: 60px;
+  text-align: center;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  background: red;
+}
+.card-detail{
+  font-size: 18px;
+  color: #777777;
+  letter-spacing: 2px;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+/* COLORS CSS */
+.light-red{
+  background: white;
+}
+.light-purple{
+  background: rgba(204, 153, 255, 0.5);
+}
+.light-green{
+  background: rgba(144, 238, 144, 1);
+
+}
+.light-blue{
+  background: rgb(254, 226, 254);
+}
+.dark-red{
+  background: red;
+}
+.dark-purple{
+  background: purple;
+}
+.dark-green{
+  background: green;
+}
+.dark-blue{
+  background: blue;
+}
+      .card {
+width: 76rem;  
+position: fixed;
+height: 300px;
+top: 350px; /* Adjust the top value to make space for the header */
+/* Adjust the left value to make space for the navbar */
+bottom:200px;
+background-color: white;
+text-align: left;
+overflow-y: auto; /* Add this line to make it scrollable */
+}
+
+      </style>
+</h:head>
+<h:body >
+    <div >
+        <ui:include src="/template/Header.xhtml" />
+    </div>
+    <div>
+    <div class="card--container">
+        <h3 class="main--title">Your account data</h3>
+        <div class="card--wrapper">
+            <div class="payment--card light-red">
+                <div class="card--header">
+                    <div class="amount">
+                        <span class="title">
+                            Savings
+                        </span>
+                        <span class="amount--value">
+                            Ush 2,300,550.00
+                        </span>
+                    </div>
+                    <i class="fas fa-money-bill-wave icon dark-red"></i>
+                    
+                </div>
+                <span class="card-detail">
+                    ** ** 3484
+                </span>
+            </div>
+            <div class="payment--card light-green">
+                <div class="card--header">
+                    <div class="amount">
+                        <span class="title">
+                            Loans
+                        </span>
+                        <span class="amount--value">
+                            Ush 1,300,550.00
+                        </span>
+                    </div>
+                    <i class="fas fa-coins icon dark-green"></i>
+                    
+                </div>
+                <span class="card-detail">
+                    ** ** 3484
+                </span>
+            </div>
+            <div class="payment--card light-purple">
+                <div class="card--header">
+                    <div class="amount">
+                        <span class="title">
+                            Withdraws
+                        </span>
+                        <span class="amount--value">
+                            Ush 300,550.00
+                        </span>
+                    </div>
+                    <i class="fas fa-money-check-alt icon dark-purple"></i>
+                    
+                </div>
+                <span class="card-detail">
+                    ** ** 3484
+                </span>
+            </div>
+        </div>
+    </div>
+    
+        <h:form>
+        <div class="card" style="overflow:scroll;">
+        <p:dataTable var="user" value="#{userView.users}" id="userTable">
+            <p:column headerText="Date" width="30px">
+                <h:outputText value="#{user.username}" />
+            </p:column>
+
+            <p:column headerText="Transaction" width="30px">
+                <h:outputText value="#{user.password}" />
+            </p:column>
+
+            <p:column headerText="Amount" width="30px">
+                <h:commandButton value="Delete" action="#{userView.deleteUser(user)}" update="userTable"/>
+            </p:column>
+
+            <p:column headerText="Balance" width="60px">
+                <p:commandButton value="view" action="#{navigation.getLogin()}" actionListener="#{loginForm.setUser(user)}"/>
+            </p:column>
+
+
+            <!-- <p:column headerText="Category">
+                <h:outputText value="#{product.category}" />
+            </p:column>
+
+            <p:column headerText="Quantity">
+                <h:outputText value="#{product.quantity}" />
+            </p:column> -->
+        </p:dataTable>
+        </div>
+        </h:form>
+    </div>
+
+    <div >
+        <ui:include src="/template/Navbar.xhtml" />
+    </div>
+
+    <div class="footer" style="background-color: lightgreen;">
+        <ui:include src="/template/Footer.xhtml" />
+    </div>
+
+</h:body>
+</html>

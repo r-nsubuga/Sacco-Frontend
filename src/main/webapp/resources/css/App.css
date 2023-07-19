@@ -2,13 +2,13 @@
 Add custom styles here
 */
 
-        
+
 .nav {
 list-style-type: none;
 margin: 0;
 padding: 10px;
 width: 230px;
-background-color: lightblue;
+background-color: rgb(5, 5, 65);
 position: fixed;
 top: 130px; /* Adjust the top value to make space for the header */
 bottom: 150px; /* Adjust the bottom value to make space for the footer */
@@ -19,7 +19,6 @@ z-index: 0; /* Add this line to place the navbar behind the header */
 .nav li {
 text-align: center;
 padding: 8px 16px;
-border-bottom: 1px solid lightblue;
 }
 
 .nav li:last-child {
@@ -27,7 +26,7 @@ border-bottom: none;
 }
 
 .nav li a {
-text-decoration: none;
+text-decoration:white;
 color: black;
 display: block;
 }
@@ -38,31 +37,31 @@ background-color: #ddd;
 
 .card {
 width: calc(100% - 280px); /* Adjust the width based on the navbar width */
-height: calc(100% - 100px); /* Adjust the height based on the header and footer height */
-position: fixed;
-top: 50px; /* Adjust the top value to make space for the header */
-left: 250px; /* Adjust the left value to make space for the navbar */
+height: calc(100% - 100px); /*Adjust the height based on the header and footer height */
+position: relative;
+top: 100px; /* Adjust the top value to make space for the header */
+left: 100px; /* Adjust the left value to make space for the navbar */
 background-color: white;
 text-align: center;
 overflow-y: auto; /* Add this line to make it scrollable */
 }
 
-.header {
+/* .header {
 position: fixed;
 top: 0;
 left: 0;
 right: 0;
-height: 80px; /* Increase the height of the header */
-background-color: lightblue;
-z-index: 1; /* Add this line to place the header in front of other elements */
+height: 80px; 
+background-color: rgb(5, 5, 65);
+z-index: 1; 
 display: flex;
 align-items: center;
 padding: 10px;
-}
+} */
 
 .footer {
 text-align: center;
-background-color:lightblue;
+background-color:rgb(5, 5, 65);
 padding: 5px;
 position: fixed;
 left: 0;
@@ -83,7 +82,7 @@ box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .logo-image {
-
+background-color: #f9f9f9;
 height: 60px; /* Increase the height of the logo image */
 width: auto; /* Adjust the width to maintain aspect ratio */
 margin-right: 10px; /* Add some right margin for spacing */
@@ -122,10 +121,6 @@ position: relative; /* Add this line to establish a stacking context */
 z-index: 0; /* Add this line to place the card-container behind the header */
 }
 
-
-
-
-
 .card-container p\\:card {
 flex-basis: calc(50% - 20px);
 max-width: calc(50% - 20px);
@@ -158,12 +153,12 @@ margin-bottom: 20px; /* Add some bottom margin for spacing */
     text-align: center;
     font-family: arial;
   }
-  
+
   .title {
     color: grey;
     font-size: 18px;
   }
-  
+
   button {
     border: none;
     outline: 0;
@@ -176,13 +171,108 @@ margin-bottom: 20px; /* Add some bottom margin for spacing */
     width: 100%;
     font-size: 18px;
   }
-  
+
   a {
     text-decoration: none;
     font-size: 22px;
     color: black;
   }
-  
+
   button:hover, a:hover {
     opacity: 0.7;
   }
+
+  /* CARD CONTAINER */
+
+.card--container{
+  background: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 4px 4px rgba(0, 0, 0, 0.1);
+}
+.card--wrapper{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.main--title{
+  color: rgba(113, 99, 186, 255);
+  padding-bottom: 10px;
+  font-size: 15px;
+}
+.payment--card{
+  background: rgb(229, 223, 233);
+  border-radius: 10px;
+  padding: 1.2rem;
+  width: 290px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.5s ease-in-out;
+}
+.payment--card:hover{
+  transform: translateY(-5px);
+}
+.card--header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.amount{
+  display: flex;
+  flex-direction: column;
+}
+.title{
+  font-size: 12px;
+  font-weight: 200;
+}
+.amount--value{
+  font-size: 24px;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 600;
+}
+.icon{
+  color: #fff;
+  padding: 0.8rem;
+  height: 60px;
+  width: 60px;
+  text-align: center;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  background: red;
+}
+.card-detail{
+  font-size: 18px;
+  color: #777777;
+  letter-spacing: 2px;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+/* COLORS CSS */
+.light-red{
+  background: white;
+}
+.light-purple{
+  background: rgba(204, 153, 255, 0.5);
+}
+.light-green{
+  background: rgba(144, 238, 144, 1);
+
+}
+.light-blue{
+  background: rgb(254, 226, 254);
+}
+.dark-red{
+  background: red;
+}
+.dark-purple{
+  background: purple;
+}
+.dark-green{
+  background: green;
+}
+.dark-blue{
+  background: blue;
+}

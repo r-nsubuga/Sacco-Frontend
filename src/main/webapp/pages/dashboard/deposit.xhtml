@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+
+<h:head>
+    <f:facet name="first">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+
+        <h:outputStylesheet name="primeflex/3.3.1/primeflex.css" library="webjars"/>
+        
+    </f:facet>
+    <style>
+        .card {
+width: calc(100% - 280px); /* Adjust the width based on the navbar width */
+height: calc(100% - 100px); /*Adjust the height based on the header and footer height */
+position: relative;
+top: 100px; /* Adjust the top value to make space for the header */
+left: 100px; /* Adjust the left value to make space for the navbar */
+background-color: white;
+text-align: center;
+overflow-y: auto; /* Add this line to make it scrollable */
+}
+    </style>
+    <link rel="stylesheet" type="text/css" href="resources/css/App.css"/>
+</h:head>
+<h:body>
+    <div >
+        <ui:include src="/template/Header.xhtml" />
+    </div>
+
+    <div class="card">
+        <h:form>
+            <div class="form-table">
+                <div class="form-row">
+                    <div class="form-cell form-label">
+                        <h:outputLabel for="accId" value="AccountID:"/>
+                    </div>
+                    <div class="form-cell">
+                        <h:inputText id="accId" required="true"/>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-cell form-label">
+                        <h:outputLabel for="deposit" value="Amount to deposit:"/>
+                    </div>
+                    <div class="form-cell">
+                        <h:inputText id="deposit" required="true"/>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-cell form-label">
+                        <h:outputLabel for="pass" value="Authorize transaction:"/>
+                    </div>
+                    <div class="form-cell">
+                        <h:inputSecret  id="pass" required="true" requiredMessage="Passcode is required"/>
+                    </div>
+                </div>
+                <div class="form-cell">
+                    <p:commandButton type="button" value="OK" icon="pi pi-check" iconPos="right" />
+                </div>
+            </div>
+        </h:form>
+    </div>
+
+    <div >
+        <ui:include src="/template/Navbar.xhtml" />
+    </div>
+    
+
+    <div class="footer" style="background-color: lightgreen;">
+        <ui:include src="/template/Footer.xhtml" />
+    </div>
+
+</h:body>
+</html>

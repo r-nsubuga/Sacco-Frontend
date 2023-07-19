@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+
+<h:head>
+    <f:facet name="first">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+
+        <h:outputStylesheet name="primeflex/3.3.1/primeflex.css" library="webjars"/>
+        <h:outputStylesheet name="css/App.css"/>
+    </f:facet>
+    
+</h:head>
+
+<h:body>
+  <div >
+    <ui:include src="/template/Header.xhtml" />
+</div>
+
+<div >
+  <ui:include src="/template/Navbar.xhtml" />
+</div>
+
+    <div class="card">
+    <div class="container" style="position: relative; margin-left: 280px">
+      <div class="card flex justify-content-center">
+        <f:view>
+          <div class="w-9 h-auto border-50 bg-blue-50 shadow-1 p-2 border-round-sm">
+            <h:form>
+              <div style="margin-bottom: 20px; margin-top: 20px">
+                <h3>Confirm Personal Details</h3>
+              </div>
+
+              <div class="formgrid grid">
+                <div class="field col-12 md:col-6">
+                  <label for="firstname6">First Name</label>
+                  <input
+                    id="firstname6"
+                    type="text"
+                    class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                  />
+                </div>
+                <div class="field col-12 md:col-6">
+                  <label for="lastname6">Last Name</label>
+                  <input
+                    id="lastname6"
+                    type="text"
+                    class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                  />
+                </div>
+                <div class="field col-12 md:col-6">
+                  <label for="city">NationalID Number</label>
+                  <input
+                    id="city"
+                    type="text"
+                    class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                  />
+                </div>
+                <div class="field col-12 md:col-6">
+                  <label for="date">Date of Birth</label>
+                  <input
+                    id="date"
+                    type="date"
+                    class="w-full text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary"
+                    style="appearance: auto"
+                  />
+                </div>
+                <div class="field col-12">
+                  <div class="field">
+                    <label for="email">Email</label>
+                    <input
+                      id="email"
+                      type="text"
+                      class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <p:divider />
+              <div style="margin-bottom: 20px">
+                <h3>Financial Details</h3>
+              </div>
+
+              <div class="formgrid grid">
+                <div class="field col-12 md:col-6">
+                  <label for="bank">Amount Required</label>
+                  <input
+                    id="bank"
+                    type="number"
+                    class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                    required="required"
+                  />
+                </div>
+                <div class="field col-12 md:col-6">
+                  <label for="account">Amount to Pay per month</label>
+                  <input
+                    id="account"
+                    type="number"
+                    class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                    required="required"
+                  />
+                </div>
+
+                <div class="field col-12 md:col-6">
+                  <label for="income">Source of Income</label>
+                  <input
+                    id="income"
+                    type="text"
+                    class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                  />
+                </div>
+                <div class="field col-12 md:col-6">
+                  <label for="date1">Date expected to have loan finished</label>
+                  <input
+                    id="date1"
+                    type="date"
+                    class="w-full text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary"
+                    style="appearance: auto"
+                  />
+                </div>
+
+                <div class="field col-12">
+                  <label for="date1">Reason for getting the loan</label>
+                  <p:inputTextarea
+                    rows="6"
+                    col="33"
+                    styleClass="field col-12"
+                  />
+                </div>
+
+                <div class="field col-12 flex justify-content-center">
+                  <p:button value="APPLY" />
+                </div>
+              </div>
+            </h:form>
+          </div>
+        </f:view>
+      </div>
+    </div>
+    </div>
+
+    <div class="footer" style="background-color: lightgreen;">
+      <ui:include src="/template/Footer.xhtml" />
+  </div>
+
+</h:body>
+</html>

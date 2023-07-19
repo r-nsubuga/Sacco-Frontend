@@ -14,17 +14,30 @@
         <meta name="apple-mobile-web-app-capable" content="yes"/>
 
         <h:outputStylesheet name="primeflex/3.3.1/primeflex.css" library="webjars"/>
-        
-
-        <link rel="stylesheet" type="text/css" href="resources/css/App.css"/>
+        <h:outputStylesheet name="css/App.css"/>
     </f:facet>
+    <style>
+        .nav li {
+text-align: center;
+padding: 8px 16px;
+border-bottom: none;
+}
+        .nav li a {
+            color:green;
+        }
+    </style>
 </h:head>
-
 <h:body>
-    <div class="header" style="background-color: white; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); ">
-        <p:graphicImage library="images" name="kimwanyilogo.png" alt="image not there" class="logo-image" />
-        <p style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; left: 10px; color: green; font-size: 40px;">Kimwanyi Sacco</p>
-        <input type="submit" value="Log out" action="LoginForm.xhtml" class="login-button" style="background-color: green;"/>
-    </div>
+    
+        <ul class="nav" style="background-color: white; box-shadow: 0 4px 4px 4px rgba(0, 0, 0, 0.1);">
+            <li><h:outputLink>Profile</h:outputLink></li>
+            <li><a href="#">Account</a></li>
+            <li><a href="/pages/dashboard/Dashboard.xhtml">SACCO Forum</a></li>
+            <li><a href="#">Deposit</a></li>
+            <li><a href="#">Withdraw</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Help</a></li>
+        </ul>
+    
 </h:body>
 </html>
