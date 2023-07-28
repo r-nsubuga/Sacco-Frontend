@@ -17,6 +17,56 @@ public class Navigation {
 
     private final String login = "/pages/authentications/LoginForm.xhtml";
 
+    private final String transaction = "/pages/dashboard/deposit.xhtml";
+    
+    private final String account = "/pages/dashboard/account.xhtml";
+
+    private final String profile = "/pages/dashboard/profile.xhtml";
+    
+    private final String services = "/pages/dashboard/services.xhtml";
+
+    private final String adminDash = "/pages/admin/adminBoard.xhtml";
+
+     public String getAdminDash() {
+        return adminDash;
+    }
+
+    private final String adminVerify = "/pages/admin/adminVerify.xhtml";
+
+     public String getAdminVerify() {
+        return adminVerify;
+    }
+
+    private final String adminApprove = "/pages/admin/adminApprove.xhtml";
+
+    private final String adminReport = "/pages/admin/adminReport.xhtml";
+
+    public String getAdminReport() {
+        return adminReport;
+    }
+
+    public String getAdminApprove() {
+        return adminApprove;
+    }
+
+    public String getProfile() {
+        return profile;
+    }
+
+    public String getAccount() {
+        return account;
+    }
+
+    public String getTransaction() {
+        return transaction;
+    }
+
+   
+
+    public String getServices() {
+        return services;
+    }
+
     public String getLogin() {
         return login;
     }

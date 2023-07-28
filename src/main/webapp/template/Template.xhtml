@@ -1,27 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:f="http://java.sun.com/jsf/core"
 >
+  <h:head>
+    <f:facet name="first">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+      />
+      <meta name="apple-mobile-web-app-capable" content="yes" />
 
+      <h:outputStylesheet
+        name="primeflex/3.3.1/primeflex.css"
+        library="webjars"
+      />
+    </f:facet>
+    <style>
+    .fixed {
+      top: 0;
+      left: 0;
+      z-index: 999;
+    }
+  </style>
+  </h:head>
 
-<f:view>
-    <ui:insert name="header">
+  <h:body class="flex flex-column">
+    <div
+      class="h-5rem fixed p-col-12 w-full shadow-4"
+    >
+      <ui:insert name="header">
         <ui:include src="/template/Header.xhtml" />
-    </ui:insert>
-    <ui:insert name="nav">
-        <ui:include src="/template/Navbar.xhtml" />
-    </ui:insert>
-    <ui:insert name="footer">
-        <ui:include src="/template/Footer.xhtml" />
-    </ui:insert>
-</f:view>
+      </ui:insert>
+    </div>
+
+    <div class="p-grid p-col-12 md:inline-flex mt-8 mb-2 h-28rem">
+      <div
+        style=" 
+          width: 12em;
+          background-color: white;
+        "
+      >
+      <div>
+        <ui:insert name="nav" class=" inline-flex p-col-12 ">
+          <ui:include src="/template/Navbar.xhtml" />
+        </ui:insert>
+      </div>
+    </div>
+      <div
+        style="
+          
+          width: 55em;
+          right: 4em;
+        "
+        class=" ml-5 bg-gray-200"
+      >
+        <div class=" md:flex ml-1">
+          <ui:insert name="content" class="p-col-12 ml-5">
+            <ui:include src="/template/Contents.xhtml" />
+          </ui:insert>
+        </div>
+      </div>
+    </div>
+  </h:body>
 </html>
-
-
-
-        

@@ -20,136 +20,41 @@
 </h:head>
 
 <h:body>
-  <div >
-    <ui:include src="/template/Header.xhtml" />
-</div>
+  <ui:composition template="/template/Template.xhtml">
+    <ui:define name="content">
 
-<div >
-  <ui:include src="/template/Navbar.xhtml" />
-</div>
+    <div class="flex ">
+          <h:form>
+            <p:dataTable
+              var="transaction"
+              value="#{transbean.transactions_list}"
+              rows="5"
+              paginator="true"
+              paginatorPosition="both"
+              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+              currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+              
+            >
 
-    <div class="card">
-    <div class="container" style="position: relative; margin-left: 280px">
-      <div class="card flex justify-content-center">
-        <f:view>
-          <div class="w-9 h-auto border-50 bg-blue-50 shadow-1 p-2 border-round-sm">
-            <h:form>
-              <div style="margin-bottom: 20px; margin-top: 20px">
-                <h3>Confirm Personal Details</h3>
-              </div>
+            <p:column headerText="ID" class="w-2">
+              <h:outputText value="#{transaction.transID}" />
+            </p:column> 
 
-              <div class="formgrid grid">
-                <div class="field col-12 md:col-6">
-                  <label for="firstname6">First Name</label>
-                  <input
-                    id="firstname6"
-                    type="text"
-                    class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
-                  />
-                </div>
-                <div class="field col-12 md:col-6">
-                  <label for="lastname6">Last Name</label>
-                  <input
-                    id="lastname6"
-                    type="text"
-                    class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
-                  />
-                </div>
-                <div class="field col-12 md:col-6">
-                  <label for="city">NationalID Number</label>
-                  <input
-                    id="city"
-                    type="text"
-                    class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
-                  />
-                </div>
-                <div class="field col-12 md:col-6">
-                  <label for="date">Date of Birth</label>
-                  <input
-                    id="date"
-                    type="date"
-                    class="w-full text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary"
-                    style="appearance: auto"
-                  />
-                </div>
-                <div class="field col-12">
-                  <div class="field">
-                    <label for="email">Email</label>
-                    <input
-                      id="email"
-                      type="text"
-                      class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
-                    />
-                  </div>
-                </div>
-              </div>
+              <p:column headerText="Amount">
+                <h:outputText value="#{transaction.amount}" />
+              </p:column>
 
-              <p:divider />
-              <div style="margin-bottom: 20px">
-                <h3>Financial Details</h3>
-              </div>
+              <p:column headerText="Transaction Type">
+                <h:outputText value="#{transaction.transactionType}" />
+              </p:column>
 
-              <div class="formgrid grid">
-                <div class="field col-12 md:col-6">
-                  <label for="bank">Amount Required</label>
-                  <input
-                    id="bank"
-                    type="number"
-                    class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
-                    required="required"
-                  />
-                </div>
-                <div class="field col-12 md:col-6">
-                  <label for="account">Amount to Pay per month</label>
-                  <input
-                    id="account"
-                    type="number"
-                    class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
-                    required="required"
-                  />
-                </div>
+              
 
-                <div class="field col-12 md:col-6">
-                  <label for="income">Source of Income</label>
-                  <input
-                    id="income"
-                    type="text"
-                    class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
-                  />
-                </div>
-                <div class="field col-12 md:col-6">
-                  <label for="date1">Date expected to have loan finished</label>
-                  <input
-                    id="date1"
-                    type="date"
-                    class="w-full text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary"
-                    style="appearance: auto"
-                  />
-                </div>
+            </p:dataTable>
+          </h:form>
+        </div>
 
-                <div class="field col-12">
-                  <label for="date1">Reason for getting the loan</label>
-                  <p:inputTextarea
-                    rows="6"
-                    col="33"
-                    styleClass="field col-12"
-                  />
-                </div>
-
-                <div class="field col-12 flex justify-content-center">
-                  <p:button value="APPLY" />
-                </div>
-              </div>
-            </h:form>
-          </div>
-        </f:view>
-      </div>
-    </div>
-    </div>
-
-    <div class="footer" style="background-color: lightgreen;">
-      <ui:include src="/template/Footer.xhtml" />
-  </div>
-
+    </ui:define>
+  </ui:composition>
 </h:body>
 </html>

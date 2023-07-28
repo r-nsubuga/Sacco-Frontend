@@ -6,25 +6,28 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core"
 >
-<h:head>
-    <f:facet name="first">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
-        <meta name="apple-mobile-web-app-capable" content="yes"/>
 
-        <h:outputStylesheet name="primeflex/3.3.1/primeflex.css" library="webjars"/>
+<style>
+    .bg-green-500 {
+    background: green;
+    color: #fff;
+    border: 1px solid green;
+    border-radius: 4px;
+    transition: background-color .2s,color .2s,border-color .2s,box-shadow .2s,opacity .2s;
+    }
+
+</style>
+
+
+
+<ui:composition>
+    <div class="flex justify-content-between">
+        <p:graphicImage library="images" name="kimwanyi.png" alt="image not there" class="logo-image" style="width: 7rem; height: 5rem; display:flex" />
+        <div class="h-2 mr-2 mt-2">
+            <p:commandButton value="Log out" action="#{loginForm.logout()}" icon="pi pi-sign-out" class="bg-green-500" outcome="#{navigation.login}"/>
+        </div>
         
-
-        <link rel="stylesheet" type="text/css" href="resources/css/App.css"/>
-    </f:facet>
-</h:head>
-
-<h:body>
-    <div class="header" style="background-color: white; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); ">
-        <p:graphicImage library="images" name="kimwanyilogo.png" alt="image not there" class="logo-image" />
-        <p style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; left: 10px; color: green; font-size: 40px;">Kimwanyi Sacco</p>
-        <input type="submit" value="Log out" action="LoginForm.xhtml" class="login-button" style="background-color: green;"/>
     </div>
-</h:body>
+</ui:composition>
+
 </html>
