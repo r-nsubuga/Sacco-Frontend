@@ -1,7 +1,8 @@
 package org.pahappa.systems.kimanyisacco.views.authentication;
 
+import org.pahappa.systems.kimanyisacco.constants.Gender;
 import org.pahappa.systems.kimanyisacco.controllers.Hyperlinks;
-import org.pahappa.systems.kimanyisacco.models.Register;
+import org.pahappa.systems.kimanyisacco.models.Member;
 import org.pahappa.systems.kimanyisacco.services.implement.UserServiceImpl;
 
 import java.io.IOException;
@@ -15,23 +16,39 @@ import javax.faces.context.FacesContext;
 @SessionScoped
 
 public class RegisterForm {
-    private Register registerUser;
+    private Member userToRegister;
+    private Gender gender;
+        
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
+    //Getter for gender enum values
+    public Gender[] getGenders() {
+        return Gender.values();
+    }
+
+    public Member getUserToRegister() {
+        return userToRegister;
+    }
+
+    public void setUserToRegister(Member userToRegister) {
+        this.userToRegister = userToRegister;
+    }
+
     UserServiceImpl userCreate = new UserServiceImpl();
 
-    public Register getRegisterUser() {
-        return registerUser;
-    }
-
-    public void setRegisterUser(Register registerUser) {
-        this.registerUser = registerUser;
-    }
-
      public RegisterForm() {
-        this.registerUser = new Register();
+        this.userToRegister = new Member();
     }
 
     public void userRegister() throws IOException{
-        userCreate.authenticateUser(registerUser);
+       
+        userCreate.authenticateUser(userToRegister);
 
          String base_url = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
          FacesContext.getCurrentInstance().getExternalContext().redirect(base_url + Hyperlinks.login);

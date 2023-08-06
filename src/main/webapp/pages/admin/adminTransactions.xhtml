@@ -100,45 +100,37 @@
           <h:form>
             <p:dataTable
               var="transaction"
-              value="#{adminBean.getTransactions()}"
-              rows="10"
-              id="WdataTable"
+              value="#{adminBean.getAllTransactions()}"
+              rows="5"
+              id="memberTable"
               paginator="true"
               paginatorPosition="both"
               paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
               currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
-              rowsPerPageTemplate="5,10,{ShowAll|'All'}"
+              sortMode="single"
             >
-              <p:column headerText="Member">
-                <h:outputText value="#{transaction.account.owner.username}" />
+              <p:column
+                headerText="Date"
+                styleClass="p-col-5"
+                sortBy="#{transaction.transactionDate}"
+              >
+                <h:outputText value="#{transaction.transactionDate}" />
               </p:column>
 
-              <p:column headerText="Amount">
+              <p:column headerText="Amount" styleClass="p-col-3">
                 <h:outputText value="#{transaction.amount}" />
               </p:column>
 
-              <p:column headerText="Status">
-                <h:outputText value="#{transaction.status}" />
+              <p:column headerText="Type" styleClass="p-col-2" filterBy="#{transaction.transactionType}">
+                <h:outputText value="#{transaction.transactionType}" />
               </p:column>
 
-              <p:column headerText="Approve">
-                <p:commandButton
-                  class="bg-green-600 p-button-rounded"
-                  value="Approve"
-                  action="#{adminBean.approveWithdraw(transaction.transID)}"
-                  onclick="return confirm('Are you sure you want to approve this withdraw request?')"
-                  update="WdataTable"
-                />
-              </p:column>
-
-              <p:column headerText="Reject">
-                <p:commandButton
-                  class="bg-red-600"
-                  value="Reject"
-                  action="#{adminBean.rejectWithdraw(transaction.transID)}"
-                  onclick="return confirm('Are you sure you want to reject this withdraw request?')"
-                  update="WdataTable"
-                />
+              <p:column
+                headerText="Username"
+                styleClass="p-col-2"
+                filterBy="#{transaction.account.owner.username}"
+              >
+                <h:outputText value="#{transaction.account.owner.username}" />
               </p:column>
             </p:dataTable>
           </h:form>

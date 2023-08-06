@@ -7,13 +7,14 @@ import javax.persistence.Table;
 import org.pahappa.systems.kimanyisacco.models.Account;
 
 @Entity
-@Table(name="transaction_table")
+@Table(name="transactions")
 public class Transactions {
     private int transID;
     private int amount;
     private String transactionType;
     private int status;
-    private Account accNumber;
+    private Account account;
+    private Date transactionDate;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -47,18 +48,26 @@ public class Transactions {
         this.status = status;
     }
 
+    @Column(name="transaction_date" )
+    public Date getTransactionDate() {
+        return transactionDate;
+    }
+    public void setTransactionDate(Date transactionDate) {
+        this.transactionDate = transactionDate;
+    }
+
     @ManyToOne
     @JoinColumn(name="account_fk", referencedColumnName = "account_number")
-    public Account getAccNumber() {
-        return accNumber;
+    public Account getAccount() {
+        return account;
     }
-    public void setAccNumber(Account accNumber) {
-        this.accNumber = accNumber;
+    public void setAccount(Account account) {
+        this.account = account;
     }
     @Override
     public String toString() {
         return "Transactions [transID=" + transID + ", amount=" + amount + ", transactionType=" + transactionType
-                + ", status=" + status + ", accNumber=" + accNumber + "]";
+                + ", status=" + status + ", transactionDate=" + transactionDate + ", account=" + account + "]";
     }
 
     

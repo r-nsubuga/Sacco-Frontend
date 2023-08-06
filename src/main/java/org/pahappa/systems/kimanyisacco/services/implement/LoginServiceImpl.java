@@ -3,20 +3,20 @@ package org.pahappa.systems.kimanyisacco.services.implement;
 import java.util.List;
 
 import org.mindrot.jbcrypt.BCrypt;
-import org.pahappa.systems.kimanyisacco.DAO.LoginDAO;
-import org.pahappa.systems.kimanyisacco.models.Register;
+import org.pahappa.systems.kimanyisacco.DAO.UserDAO;
+import org.pahappa.systems.kimanyisacco.models.Member;
 
 public class LoginServiceImpl {
-    LoginDAO loginDAO = new LoginDAO();
-    Register logged_user;
+    UserDAO userDAO = new UserDAO();
+    Member logged_user;
 
-    public Register allowLogin(Register user){
+    public Member allowLogin(Member user){
         String username = user.getUsername();
         String password = user.getPassword();
         
-        List<Register> users_list = loginDAO.getAllUsers();
+        List<Member> usersList = userDAO.getUsers();
 
-        for(Register user2:users_list){
+        for(Member user2:usersList){
             if(username.equals(user2.getUsername()) && BCrypt.checkpw(password, user2.getPassword())){
                 logged_user =  user2;
             }else{

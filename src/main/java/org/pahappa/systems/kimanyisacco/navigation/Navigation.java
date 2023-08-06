@@ -41,6 +41,19 @@ public class Navigation {
 
     private final String adminReport = "/pages/admin/adminReport.xhtml";
 
+    private final String adminMembers = "/pages/admin/adminMembers.xhtml";
+
+    private final String adminTransactions = "/pages/admin/adminTransactions.xhtml";
+
+
+    public String getAdminTransactions() {
+        return adminTransactions;
+    }
+
+    public String getAdminMembers() {
+        return adminMembers;
+    }
+
     public String getAdminReport() {
         return adminReport;
     }

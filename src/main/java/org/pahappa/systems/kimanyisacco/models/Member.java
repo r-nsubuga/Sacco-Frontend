@@ -1,21 +1,27 @@
 package org.pahappa.systems.kimanyisacco.models;
 
+import java.util.Date;
+
 import javax.persistence.*;
 import org.pahappa.systems.kimanyisacco.models.Account;
+import org.pahappa.systems.kimanyisacco.constants.Gender;
 
 @Entity
-@Table(name="members_table")
-public class Register {
+@Table(name="members")
+public class Member {    //Class for the member at registration
     private int memberId;
     private String firstName;    
     private String lastName;
     private String username;
-    private String gender; 
+    private Gender gender; 
+    private Date date_of_birth;
     private String email;
     private String contact; 
+    private String next_of_kin;
+    private String next_of_kinContact;
     private String password; 
     private int status;
-    private Account accountNumber;
+    private Account account;
 
     
     @Id
@@ -51,12 +57,12 @@ public class Register {
         this.username = username;
     }
 
-    
+    @Enumerated(EnumType.STRING)
     @Column(name="gender", nullable=false)
-    public String getGender() {
+    public Gender getGender() {
         return gender;
     }
-    public void setGender(String gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 
@@ -76,7 +82,7 @@ public class Register {
         this.password = password;
     }
 
-    @Column(name="contact", nullable=false )
+    @Column(name="member_contact", nullable=false )
     public String getContact() {
         return contact;
     }
@@ -84,16 +90,40 @@ public class Register {
         this.contact = contact;
     }
 
+    @Column(name="date_of_birth", nullable=false)
+    public Date getDate_of_birth() {
+        return date_of_birth;
+    }
+    public void setDate_of_birth(Date date_of_birth) {
+        this.date_of_birth = date_of_birth;
+    }
+
+    @Column(name="next_of_kin")
+    public String getNext_of_kin() {
+        return next_of_kin;
+    }
+    public void setNext_of_kin(String next_of_kin) {
+        this.next_of_kin = next_of_kin;
+    }
+
+    @Column(name="next_of_kin_contact")
+    public String getNext_of_kinContact() {
+        return next_of_kinContact;
+    }
+    public void setNext_of_kinContact(String next_of_kinContact) {
+        this.next_of_kinContact = next_of_kinContact;
+    }
+
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name="account_number_fk", referencedColumnName = "account_number")
-    public Account getAccountNumber() {
-        return accountNumber;
+    public Account getAccount() {
+        return account;
     }
-    public void setAccountNumber(Account accountNumber) {
-        this.accountNumber = accountNumber;
+    public void setAccount(Account account) {
+        this.account = account;
     }
     
-    @Column(name="status", columnDefinition="integer default 0")
+    @Column(name="member_status", columnDefinition="integer default 0")
     public int getStatus() {
         return status;
     }

@@ -1,88 +1,202 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core"
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:p="http://primefaces.org/ui"
+  xmlns:f="http://java.sun.com/jsf/core"
 >
-
-<h:head>
+  <h:head>
     <style>
-        .logo-image {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            width: 150px;
-            height: 100px;
-            background-color: azure; 
-        }
+      .logo-image {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 150px;
+        height: 100px;
+        background-color: azure;
+      }
     </style>
     <f:facet name="first">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
-        <meta name="apple-mobile-web-app-capable" content="yes"/>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+      />
+      <meta name="apple-mobile-web-app-capable" content="yes" />
 
-        <h:outputStylesheet name="primeflex/3.3.1/primeflex.css" library="webjars"/>
-        <h:outputStylesheet library="css" name="App.css"/>
+      <h:outputStylesheet
+        name="primeflex/3.3.1/primeflex.css"
+        library="webjars"
+      />
+      <h:outputStylesheet library="css" name="App.css" />
     </f:facet>
-</h:head>
-<h:body style="display: flex; justify-content: center; align-items: center; background-color:ghostwhite;">
-    
+  </h:head>
+  <h:body
+    style="
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: ghostwhite;
+    "
+  >
     <f:view>
-        <div class="mb-4 mr-4" style="width: 400px; border: 1px solid #ccc; border-radius: 4px; padding: 10px; text-align: center; background-color:azure">
-            <h1>Kimwanyi SACCO</h1>
-            <h:graphicImage url="/resources/images/kimwanyi.png" class="logo-image"/>
-            <h:form>
-                
-                <h3> REGISTER </h3>
-                <div class="form-group">
-                    <p:outputLabel for="float-fname" value="Firstname:"/><br/>
-                    <p:inputText id="float-fname" value="#{registerForm.registerUser.firstName}"/>
-                </div>
-                <div class="form-group">
-                    <p:outputLabel for="float-lname" value="Lastname:"/><br/>
-                    <p:inputText id="float-lname" value="#{registerForm.registerUser.lastName}"/>
-                </div>
-                <div class="form-group">
-                    <p:outputLabel for="float-input" value="Username:"/><br/>
-                    <p:inputText id="float-input" required="true" value="#{registerForm.registerUser.username}"/>
-                </div>
-                    <p:outputLabel value="Gender:"/><br/>
-                    <p:selectOneMenu id="option" value="#{registerForm.registerUser.gender}">
-                    <f:selectItem itemLabel="Select One" itemValue=""/>
-                    <f:selectItem itemLabel="Male" itemValue="Male"/>
-                    <f:selectItem itemLabel="Female" itemValue="Female"/>
-                    <f:facet name="footer">
-                        <p:divider styleClass="mt-0" />
-                        <h:outputText value="2 options" style="font-weight:bold;"/>
-                    </f:facet>
-                </p:selectOneMenu>
-                    
-                <div class="form-group">
-                    <p:outputLabel for="float-email" value="Email:"/><br/>
-                    <p:inputText id="float-email" required="true" value="#{registerForm.registerUser.email}"/>
-                </div>
-                <div class="form-group">
-                    <p:outputLabel for="contact" value="Contact:"/><br/>
-                    <p:inputText id="contact" required="true" value="#{registerForm.registerUser.contact}"/>
-                </div>
-                <div class="form-group">
-                    <p:outputLabel for="toggle" value="Password:"/><br/>
-                    <p:password id="toggle" toggleMask="true" redisplay="false" required="true" WeakLabel="Weak" value="#{registerForm.registerUser.password}"/>
-                </div><br/>
-
-                <div class="form-group w-4 ml-8 justify-content-center">
-                    
-                    <p:commandButton value="Sign up" icon="pi pi-check" iconPos="right" action="#{registerForm.userRegister()}"/>
-                
+      <div
+        class="mb-4 mr-4"
+        style="
+          width: 500px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          padding: 10px;
+          text-align: center;
+          background-color: azure;
+        "
+      >
+        <h1>Kimwanyi SACCO</h1>
+        <h:graphicImage
+          url="/resources/images/kimwanyi.png"
+          class="logo-image"
+        />
+        <h:form>
+          <p:growl id="messages" showDetail="true" />
+          <h3>REGISTER</h3>
+          <div class="ui-fluid flex formgrid grid">
+            <div class="field col-12 md:col-6">
+              <p:outputLabel for="float-fname" value="Firstname:" /><br />
+              <p:inputText
+                id="float-fname"
+                required="true"
+                requiredMessage="Firstname is required"
+                value="#{registerForm.userToRegister.firstName}"
+              />
             </div>
-                <h5 >Already have an account!!!<p:link outcome="/pages/authentications/LoginForm.xhtml" value="Sign in"/></h5>
-            </h:form>
-        </div>
+            <div class="field col-12 md:col-6">
+              <p:outputLabel for="float-lname" value="Lastname:" /><br />
+              <p:inputText
+                id="float-lname"
+                required="true"
+                requiredMessage="Lastname is required"
+                value="#{registerForm.userToRegister.lastName}"
+              />
+            </div>
+            <br />
+            <div class="field col-12 md:col-6">
+              <p:outputLabel for="float-input" value="Username:" /><br />
+              <p:inputText
+                id="float-input"
+                required="true"
+                value="#{registerForm.userToRegister.username}"
+              />
+            </div>
+            <div class="field col-12 md:col-6">
+              <p:outputLabel value="Gender:" /><br />
+              <p:selectOneMenu
+                id="option"
+                value="#{registerForm.userToRegister.gender}"
+              >
+                <f:selectItem itemLabel="Select One" itemValue="#{null}" />
+                <f:selectItems
+                  value="#{registerForm.genders}"
+                  var="gender"
+                  itemLabel="#{gender.value}"
+                  itemValue="#{gender}"
+                />
+                <f:facet name="footer">
+                  <p:divider styleClass="mt-0" />
+                  <h:outputText value="2 options" style="font-weight: bold" />
+                </f:facet>
+              </p:selectOneMenu>
+            </div>
+            <div class="field col-12 md:col-6">
+              <p:outputLabel for="float-email" value="Email:" /><br />
+              <p:inputText
+                id="float-email"
+                required="true"
+                requiredMessage="Email is required"
+                value="#{registerForm.userToRegister.email}"
+              >
+                <f:validateRegex
+                  pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$"
+                />
+                <f:facet name="validator">
+                  <h:message style="color: red" for="float-email" />
+                  <h:outputText
+                    value="Invalid email format. Please enter a valid email address."
+                  />
+                </f:facet>
+              </p:inputText>
+            </div>
+            <div class="field col-12 md:col-6">
+              <p:outputLabel for="dob" value="Date of Birth:" /><br />
+              <p:calendar
+                id="dob"
+                pattern="dd/MM/yyyy"
+                mindate="01/01/1980"
+                maxdate="31/12/2006"
+                yearRange="1980:2006"
+                showButtonPanel="true"
+                value="#{registerForm.userToRegister.date_of_birth}"
+              />
+            </div>
+            <div class="field col-12 md:col-6">
+              <p:outputLabel for="contact" value="Contact:" /><br />
+              <p:inputText
+                id="contact"
+                required="true"
+                requiredMessage="Contact is required"
+                value="#{registerForm.userToRegister.contact}"
+              />
+            </div>
+            <div class="field col-12 md:col-6">
+              <p:outputLabel for="kin" value="Next of kin:" /><br />
+              <p:inputText
+                id="kin"
+                value="#{registerForm.userToRegister.next_of_kin}"
+              />
+            </div>
+            <div class="field col-12 md:col-6">
+              <p:outputLabel
+                for="ncontact"
+                value="Next of kin Contact:"
+              /><br />
+              <p:inputText
+                id="ncontact"
+                value="#{registerForm.userToRegister.next_of_kinContact}"
+              />
+            </div>
+            <div class="field col-12 md:col-6">
+              <p:outputLabel for="toggle" value="Password:" /><br />
+              <p:password
+                class="w-12"
+                id="toggle"
+                toggleMask="true"
+                redisplay="false"
+                required="true"
+                requiredMessage="Password is required"
+                WeakLabel="Weak"
+                value="#{registerForm.userToRegister.password}"
+              />
+              <br />
+            </div>
+          </div>
+          <div class="w-auto ml-4 justify-content-center">
+            <p:commandButton
+              update="messages"
+              value="Sign up"
+              icon="pi pi-check"
+              iconPos="right"
+              action="#{registerForm.userRegister()}"
+            />
+          </div>
+
+          <h5>
+            Already have an account!!!<p:link
+              outcome="/pages/authentications/LoginForm.xhtml"
+              value="Sign in"
+            />
+          </h5>
+        </h:form>
+      </div>
     </f:view>
-    
-</h:body>
-
-
-
+  </h:body>
 </html>

@@ -25,14 +25,14 @@
     .fixed {
       top: 0;
       left: 0;
-      z-index: 999;
+      z-index: 2;
     }
   </style>
   </h:head>
 
   <h:body class="flex flex-column">
     <div
-      class="h-5rem fixed p-col-12 w-full shadow-4"
+      class="h-5rem fixed p-col-12 w-full shadow-4 opacity-100 z-1"
     >
       <ui:insert name="header">
         <ui:include src="/template/Header.xhtml" />
@@ -46,8 +46,8 @@
           background-color: white;
         "
       >
-      <div>
-        <ui:insert name="nav" class=" inline-flex p-col-12 ">
+      <div class="fixed mt-8 ">
+        <ui:insert name="nav" class="inline-flex p-col-12 w-auto">
           <ui:include src="/template/Navbar.xhtml" />
         </ui:insert>
       </div>
@@ -60,7 +60,7 @@
         "
         class=" ml-5 bg-gray-200"
       >
-        <div class=" md:flex ml-1">
+        <div class=" md:flex ml-2">
           <ui:insert name="content" class="p-col-12 ml-5">
             <ui:include src="/template/Contents.xhtml" />
           </ui:insert>

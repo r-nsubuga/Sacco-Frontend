@@ -24,8 +24,13 @@
     </f:facet>
   </h:head>
   <h:body class="flex">
-    <ui:composition template="/template/Template.xhtml">
+    <ui:composition template="/template/Template.xhtml" >
       <ui:define name="content">
+        <div class="block mt-2">
+        <div>
+          <h:outputText styleClass="text-2xl text-green-600 flex justify-content-start" value="HELLO, #{loginForm.loggeduser.getUsername()}" />
+        </div>
+        
         <div class="flex mr-6 p-md-6 p-lg-4">
           <div class="flex gap-2">
             <div class="mt-4 p-md-6 p-lg-4">
@@ -51,6 +56,7 @@
             </div>
           </div>
         </div>
+      </div>
       </ui:define>
     </ui:composition>
   </h:body>
