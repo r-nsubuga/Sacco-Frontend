@@ -13,7 +13,7 @@ import org.pahappa.systems.kimanyisacco.models.Member;
 public class Account {
 
     private  String accountNumber;
-    private int balance;
+    private double balance;
     private Member owner;
 
    
@@ -27,10 +27,10 @@ public class Account {
     }
 
     @Column(name="balance", columnDefinition = "integer default 0")
-    public int getBalance() {
+    public double getBalance() {
         return balance;
     }
-    public void setBalance(int balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 

@@ -6,8 +6,10 @@ import org.pahappa.systems.kimanyisacco.models.Member;
 
 public interface UserService {
     // public void createUser(Member user);
-    public List<Member> getUsers();
+    public List<Member> getMembers();
+    public List<Member> getMembersToDisplay();
     public void authenticateUser(Member user);
     public void verifyAccount(int id);
-    public List<Member> getUsersToVerify();
+    public List<Member> getMembersToVerify();
+    void rejectAccount(int id);
 }

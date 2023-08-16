@@ -27,7 +27,7 @@
           <h:form>
             <p:dataTable
               var="transaction"
-              value="#{transbean.transactions_list}"
+              value="#{transbean.transactionsList}"
               rows="5"
               paginator="true"
               paginatorPosition="both"
@@ -37,7 +37,7 @@
             >
 
             <p:column headerText="ID" class="w-2">
-              <h:outputText value="#{transaction.transID}" />
+              <h:outputText value="#{transaction.transactionID}" />
             </p:column> 
 
               <p:column headerText="Amount">

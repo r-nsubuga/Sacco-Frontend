@@ -2,7 +2,9 @@ package org.pahappa.systems.kimanyisacco.services.implement;
 
 import org.pahappa.systems.kimanyisacco.DAO.TransactionDAO;
 import org.pahappa.systems.kimanyisacco.DAO.UserDAO;
-import org.pahappa.systems.kimanyisacco.models.Transactions;
+import org.pahappa.systems.kimanyisacco.constants.TransactionStatus;
+import org.pahappa.systems.kimanyisacco.constants.TransactionType;
+import org.pahappa.systems.kimanyisacco.models.Transaction;
 import org.pahappa.systems.kimanyisacco.models.Account;
 import org.pahappa.systems.kimanyisacco.services.TransactionService;
 
@@ -15,12 +17,12 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-public class TransactionImpl implements TransactionService{
+public class TransactionServiceImpl implements TransactionService{
 
     TransactionDAO transDAO = new TransactionDAO();
     UserDAO userDAO = new UserDAO();
-    private List<Transactions> transactionList;
-    private List<Transactions> withdrawList;
+    private List<Transaction> transactionList;
+    private List<Transaction> withdrawList;
     private List<Account> accountList;
     private Account account  ;
 
@@ -33,14 +35,14 @@ public class TransactionImpl implements TransactionService{
     }
 
     @Override
-    public void makeDeposit(Transactions transactions) {
-        transactions.setTransactionType("DEPOSIT");
-        transactions.setStatus(1);
+    public void makeDeposit(Transaction transactions) {
+        transactions.setTransactionType(TransactionType.DEPOSIT);
+        transactions.setTransactionStatus(TransactionStatus.APPROVED);
         transDAO.makeTransaction(transactions);
     
     }
 
-    public List<Transactions> getWithdrawsToApprove(){
+    public List<Transaction> getWithdrawsToApprove(){
         withdrawList = transDAO.getTransactions();
         return withdrawList;
 
@@ -51,9 +53,9 @@ public class TransactionImpl implements TransactionService{
     }
 
     @Override
-    public void makeWithdraw(Transactions transaction) {
-        transaction.setTransactionType("WITHDRAW");
-        transaction.setStatus(0);
+    public void makeWithdraw(Transaction transaction) {
+        transaction.setTransactionType(TransactionType.WITHDRAW); 
+        transaction.setTransactionStatus(TransactionStatus.PENDING);
         transDAO.makeTransaction(transaction);
     }
 
@@ -61,7 +63,7 @@ public class TransactionImpl implements TransactionService{
         boolean state = transDAO.approveStatus(id);
 
         if(state){
-            Transactions transactions = transDAO.getTransactionByID(id);
+            Transaction transactions = transDAO.getTransactionByID(id);
             this.account = transactions.getAccount();
             this.account.setBalance(this.account.getBalance() - transactions.getAmount());
             transDAO.addToAccount(account);
@@ -77,7 +79,7 @@ public class TransactionImpl implements TransactionService{
 
     public void rejectWithdraw(int id){
         transDAO.rejectStatus(id);
-        Transactions transactions = transDAO.getTransactionByID(id);
+        Transaction transactions = transDAO.getTransactionByID(id);
         String email = transactions.getAccount().getOwner().getEmail();
         String lastName = transactions.getAccount().getOwner().getLastName();
            
@@ -85,12 +87,12 @@ public class TransactionImpl implements TransactionService{
         
     }
     
-    public List<Transactions> getList(Account account){
+    public List<Transaction> getTransactionsByID(Account account){
         transactionList = transDAO.getByAccountID(account);
         return transactionList;
     } 
     
-    private void sendApprovalEmail(String recipientEmail, String lastName, int amount, String contact) {
+    private void sendApprovalEmail(String recipientEmail, String lastName, double amount, String contact) {
         // Configure the email properties
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
@@ -172,8 +174,8 @@ public class TransactionImpl implements TransactionService{
 
 
 
-    public List<Transactions> getAllTransactions(){
-         List<Transactions> transactionsList = transDAO.getAllTransactions();
+    public List<Transaction> getAllTransactions(){
+         List<Transaction> transactionsList = transDAO.getAllTransactions();
          return transactionsList;
     }
 
@@ -182,9 +184,9 @@ public class TransactionImpl implements TransactionService{
         return accountList;
     }
 
-    public Transactions unapprovedWithdraw(Account accountNumber){
+    public Transaction unapprovedWithdraw(Account accountNumber){
         System.out.println("called");
-        Transactions userTransactions = transDAO.getWithdrawByID(accountNumber);
+        Transaction userTransactions = transDAO.getWithdrawByID(accountNumber);
         return userTransactions;
         
     }

@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.*;
 import org.pahappa.systems.kimanyisacco.models.Account;
 import org.pahappa.systems.kimanyisacco.constants.Gender;
+import org.pahappa.systems.kimanyisacco.constants.MemberStatus;
 
 @Entity
 @Table(name="members")
@@ -14,13 +15,13 @@ public class Member {    //Class for the member at registration
     private String lastName;
     private String username;
     private Gender gender; 
-    private Date date_of_birth;
+    private Date dateOfBirth;
     private String email;
     private String contact; 
-    private String next_of_kin;
-    private String next_of_kinContact;
+    private String nextOfKin;
+    private String nextOfKinContact;
     private String password; 
-    private int status;
+    private MemberStatus memberStatus;
     private Account account;
 
     
@@ -91,30 +92,30 @@ public class Member {    //Class for the member at registration
     }
 
     @Column(name="date_of_birth", nullable=false)
-    public Date getDate_of_birth() {
-        return date_of_birth;
+    public Date getDateOfBirth() {
+        return dateOfBirth;
     }
-    public void setDate_of_birth(Date date_of_birth) {
-        this.date_of_birth = date_of_birth;
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
-    @Column(name="next_of_kin")
-    public String getNext_of_kin() {
-        return next_of_kin;
+    @Column(name="nextOfKin")
+    public String getNextOfKin() {
+        return nextOfKin;
     }
-    public void setNext_of_kin(String next_of_kin) {
-        this.next_of_kin = next_of_kin;
+    public void setNextOfKin(String nextOfKin) {
+        this.nextOfKin = nextOfKin;
     }
 
     @Column(name="next_of_kin_contact")
-    public String getNext_of_kinContact() {
-        return next_of_kinContact;
+    public String getNextOfKinContact() {
+        return nextOfKinContact;
     }
-    public void setNext_of_kinContact(String next_of_kinContact) {
-        this.next_of_kinContact = next_of_kinContact;
+    public void setNextOfKinContact(String nextOfKinContact) {
+        this.nextOfKinContact = nextOfKinContact;
     }
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="account_number_fk", referencedColumnName = "account_number")
     public Account getAccount() {
         return account;
@@ -123,11 +124,11 @@ public class Member {    //Class for the member at registration
         this.account = account;
     }
     
-    @Column(name="member_status", columnDefinition="integer default 0")
-    public int getStatus() {
-        return status;
+    @Column(name="member_status")
+    public MemberStatus getMemberStatus() {
+        return memberStatus;
     }
-    public void setStatus(int status) {
-        this.status = status;
+    public void setMemberStatus(MemberStatus memberStatus) {
+        this.memberStatus = memberStatus;
     }
 }

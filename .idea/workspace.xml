@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7c97bdeb-e0fc-458f-97d2-b4295f8ef208" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/pahappa/systems/kimanyisacco/DAO/TransactionDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/pahappa/systems/kimanyisacco/DAO/TransactionDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/pahappa/systems/kimanyisacco/DAO/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/pahappa/systems/kimanyisacco/DAO/UserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/pahappa/systems/kimanyisacco/config/SessionConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/pahappa/systems/kimanyisacco/config/SessionConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/pahappa/systems/kimanyisacco/models/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/pahappa/systems/kimanyisacco/models/Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/pahappa/systems/kimanyisacco/models/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/pahappa/systems/kimanyisacco/models/Member.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/pahappa/systems/kimanyisacco/models/Transactions.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/pahappa/systems/kimanyisacco/services/LoginService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/pahappa/systems/kimanyisacco/services/LoginService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/pahappa/systems/kimanyisacco/services/TransactionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/pahappa/systems/kimanyisacco/services/TransactionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/pahappa/systems/kimanyisacco/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/pahappa/systems/kimanyisacco/services/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/pahappa/systems/kimanyisacco/services/implement/LoginServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/pahappa/systems/kimanyisacco/services/implement/LoginServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/pahappa/systems/kimanyisacco/services/implement/TransactionImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/pahappa/systems/kimanyisacco/services/implement/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/pahappa/systems/kimanyisacco/services/implement/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/pahappa/systems/kimanyisacco/views/admin/AdminBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/pahappa/systems/kimanyisacco/views/admin/AdminBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/pahappa/systems/kimanyisacco/views/admin/AdminReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/pahappa/systems/kimanyisacco/views/admin/AdminReport.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/pahappa/systems/kimanyisacco/views/authentication/LoginForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/pahappa/systems/kimanyisacco/views/authentication/LoginForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/pahappa/systems/kimanyisacco/views/transactions/transactionBean.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/admin/adminApprove.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/admin/adminApprove.xhtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/admin/adminMembers.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/admin/adminMembers.xhtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/admin/adminReport.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/admin/adminReport.xhtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/admin/adminVerify.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/admin/adminVerify.xhtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/authentications/LoginForm.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/authentications/LoginForm.xhtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/authentications/Register.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/authentications/Register.xhtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/dashboard/deposit.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/dashboard/deposit.xhtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pages/dashboard/services.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/pages/dashboard/services.xhtml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 1
+}]]></component>
+  <component name="ProjectId" id="2U0smvcfJ9RrFnRr65CtQwiBYP8" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "ft-changes",
+    "last_opened_file_path": "/home/nsubuga/sacco-frontend/Sacco-Frontend",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7c97bdeb-e0fc-458f-97d2-b4295f8ef208" name="Changes" comment="" />
+      <created>1692087997003</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1692087997003</updated>
+      <workItem from="1692087998069" duration="1444000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

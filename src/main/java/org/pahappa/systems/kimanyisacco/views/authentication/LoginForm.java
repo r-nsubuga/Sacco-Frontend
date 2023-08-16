@@ -14,60 +14,62 @@ import javax.servlet.http.HttpSession;
 
 import org.pahappa.systems.kimanyisacco.controllers.Hyperlinks;
 import org.pahappa.systems.kimanyisacco.models.Member;
+import org.pahappa.systems.kimanyisacco.services.LoginService;
 import org.pahappa.systems.kimanyisacco.services.implement.LoginServiceImpl;
+import org.pahappa.systems.kimanyisacco.constants.MemberStatus;
 
 @ManagedBean(name = "loginForm")
 @SessionScoped
 
 public class LoginForm {
-    private Member user;
-    LoginServiceImpl userlog = new LoginServiceImpl();
+    private Member member;
+    LoginService loginService = new LoginServiceImpl();
     List<Member> userList = new ArrayList<>();
-    private Member loggeduser;
+    private Member loggedMember;
     
-    public Member getLoggeduser() {
-        return loggeduser;
+    public Member getLoggedMember() {
+        return loggedMember;
     }
 
-    public void setLoggeduser(Member loggeduser) {
-        this.loggeduser = loggeduser;
+    public void setLoggedMember(Member loggedMember) {
+        this.loggedMember = loggedMember;
     }
 
-    public Member getUser() {
-        return user;
+    public Member getMember() {
+        return member;
     }
 
-    public void setUser(Member user) {
-        this.user = user;
+    public void setMember(Member member) {
+        this.member = member;
     }
 
     public LoginForm() {
-        this.user = new Member();
+        this.member = new Member();
     }
 
     public void init() {
-        this.user = new Member();
+        this.member = new Member();
     }
 
     String base_url = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
 
     public void doLogin() throws IOException {
-        if (user.getUsername().equals("admin") && user.getPassword().equals("admin1234")) {
+        if (member.getUsername().equals("admin") && member.getPassword().equals("admin1234")) {
             
             FacesContext.getCurrentInstance().getExternalContext().redirect(base_url + Hyperlinks.adminDash);
         }
 
-        loggeduser = userlog.allowLogin(user);
+        loggedMember = loginService.allowLogin(member);
 
-        if (loggeduser != null) {
-            if (loggeduser.getStatus() == 1) {
+        if (loggedMember != null) {
+            if (loggedMember.getMemberStatus().equals(MemberStatus.APPROVED)) {
                 FacesContext facesContext = FacesContext.getCurrentInstance();
                 ExternalContext externalContext = facesContext.getExternalContext();
                 HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
                 HttpSession session = request.getSession(true);
 
-                // Store user attributes
-                session.setAttribute("LoggedUser", loggeduser);
+                // Store member attributes
+                session.setAttribute("LoggedMember", loggedMember);
 
                 FacesContext.getCurrentInstance().getExternalContext().redirect(base_url + Hyperlinks.account);
             } else {

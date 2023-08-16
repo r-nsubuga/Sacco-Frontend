@@ -118,14 +118,14 @@
               </p:column>
 
               <p:column headerText="Status">
-                <h:outputText value="#{transaction.status}" />
+                <h:outputText value="#{transaction.transactionStatus}" />
               </p:column>
 
               <p:column headerText="Approve">
                 <p:commandButton
                   class="bg-green-600 p-button-rounded"
                   value="Approve"
-                  action="#{adminBean.approveWithdraw(transaction.transID)}"
+                  action="#{adminBean.approveWithdraw(transaction.transactionID)}"
                   onclick="return confirm('Are you sure you want to approve this withdraw request?')"
                   update="WdataTable"
                 />
@@ -135,7 +135,7 @@
                 <p:commandButton
                   class="bg-red-600"
                   value="Reject"
-                  action="#{adminBean.rejectWithdraw(transaction.transID)}"
+                  action="#{adminBean.rejectWithdraw(transaction.transactionID)}"
                   onclick="return confirm('Are you sure you want to reject this withdraw request?')"
                   update="WdataTable"
                 />
