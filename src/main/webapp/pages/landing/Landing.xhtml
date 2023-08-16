@@ -47,20 +47,17 @@
     <f:view>
 <!--        The navbar-->
         <div class="card fixed w-full top-0 left-0">
-            <h:form>
+            
                 <p:growl id="messages"/>
 
-                <p:menubar>
-                    <p:submenu label="Login" icon="pi pi-fw pi-file">
-                    </p:submenu>
-
-                    <p:divider layout="vertical"/>
-
-                    <p:submenu label="Register" icon="pi pi-fw pi-file">
-                    </p:submenu>
-
-                </p:menubar>
-            </h:form>
+                <p:commandButton id="basic"  type="button" value="Access" styleClass="rounded-button ui-button-secondary  mr-2 px-3 " icon="pi pi-fw pi-user-plus" />
+                <p:overlayPanel for="basic" style="width:200px">
+                    <p:button type="button" value="Login" styleClass="ui-button-secondary ui-button-flat"
+                              icon="pi pi-fw pi-sign-in" outcome="/pages/authentications/LoginForm.xhtml"/>
+                    <p:button type="button" value="Register" styleClass="ui-button-secondary ui-button-flat"
+                              icon="pi pi-fw pi-user-plus" outcome="/pages/authentications/Register.xhtml"/>
+                </p:overlayPanel>
+            
         </div>
 
             <div class="card">
@@ -97,9 +94,8 @@
                 <div class="card1">
                     <div class="card2">
                         <h3 class="text-4xl text-center">About Us</h3>
-                        
-                            <p>Kimwanyi SACCO is an organization established originally for the purpose of saving money for future development, and the members can get loans instantly.</p>
-                         
+                            <p>Kimwanyi SACCO is an organization established originally for the purpose of saving money for future development </p>
+                            <p>The members can get loans instantly.</p>    
                     </div>
                     
                     <div class="card2">
@@ -109,22 +105,15 @@
                     </div>
                     
                     <div class="card2">
-                        <h3 class="text-4xl text-center">FAQs</h3>
+                        <h3 class="text-4xl text-center">Member Eligibility</h3>
+                        <p>Age:</p><p>A member should be between 18-35 years</p>
+                        <p>Members should be active when called upon to participate in the activities of the SACCO</p>
+                        <p>Members should be cooperative when called upon to prove eligibility and update their information </p>
                     </div>
                 </div>
             </div>
 
-
-<!--        <div>-->
-<!--            <h:outputText value="Please Click this button"/>-->
-<!--            <br/>-->
-<!--            <p:button id="toDashboardButton" icon="pi pi-check" value="Navigate to Dashboard"-->
-<!--                      outcome="/pages/dashboard/Dashboard.xhtml"/>-->
-<!--        </div>-->
     </f:view>
     </div>
-
-
 </h:body>
-
 </html>

@@ -11,8 +11,9 @@
             display: block;
             margin-left: auto;
             margin-right: auto;
-            width: 100px;
-            height: 100px; 
+            width: 150px;
+            height: 100px;
+            background-color: azure; 
         }
     </style>
     <f:facet name="first">
@@ -28,26 +29,26 @@
 <h:body style="display: flex; justify-content: center; align-items: center; background-color:ghostwhite;">
     
     <f:view>
-        <div class="card" style="width: 400px; border: 1px solid #ccc; border-radius: 4px; padding: 10px; text-align: center; background-color:azure">
+        <div class="mb-4 mr-4" style="width: 400px; border: 1px solid #ccc; border-radius: 4px; padding: 10px; text-align: center; background-color:azure">
             <h1>Kimwanyi SACCO</h1>
-            <h:graphicImage url="/resources/images/kimwanyilogo.png" class="logo-image"/>
+            <h:graphicImage url="/resources/images/kimwanyi.png" class="logo-image"/>
             <h:form>
                 
                 <h3> REGISTER </h3>
                 <div class="form-group">
                     <p:outputLabel for="float-fname" value="Firstname:"/><br/>
-                    <p:inputText id="float-fname" />
+                    <p:inputText id="float-fname" value="#{registerForm.registerUser.firstName}"/>
                 </div>
                 <div class="form-group">
                     <p:outputLabel for="float-lname" value="Lastname:"/><br/>
-                    <p:inputText id="float-lname" />
+                    <p:inputText id="float-lname" value="#{registerForm.registerUser.lastName}"/>
                 </div>
                 <div class="form-group">
                     <p:outputLabel for="float-input" value="Username:"/><br/>
-                    <p:inputText id="float-input" required="true"/>
+                    <p:inputText id="float-input" required="true" value="#{registerForm.registerUser.username}"/>
                 </div>
                     <p:outputLabel value="Gender:"/><br/>
-                    <p:selectOneMenu id="option" value="#{selectOneMenuView.selectedOption}">
+                    <p:selectOneMenu id="option" value="#{registerForm.registerUser.gender}">
                     <f:selectItem itemLabel="Select One" itemValue=""/>
                     <f:selectItem itemLabel="Male" itemValue="Male"/>
                     <f:selectItem itemLabel="Female" itemValue="Female"/>
@@ -59,20 +60,23 @@
                     
                 <div class="form-group">
                     <p:outputLabel for="float-email" value="Email:"/><br/>
-                    <p:inputText id="float-email" required="true"/>
+                    <p:inputText id="float-email" required="true" value="#{registerForm.registerUser.email}"/>
                 </div>
                 <div class="form-group">
-                    <p:outputLabel for="toggle-p" value="Password:"/><br/>
-                    <p:password id="toggle-p" toggleMask="true" redisplay="false" required="true" feedback="true"/>
+                    <p:outputLabel for="contact" value="Contact:"/><br/>
+                    <p:inputText id="contact" required="true" value="#{registerForm.registerUser.contact}"/>
                 </div>
                 <div class="form-group">
-                    <p:outputLabel for="toggle" value="Confirm Password:"/><br/>
-                    <p:password id="toggle" toggleMask="true" redisplay="false" required="true" feedback="true"/>
+                    <p:outputLabel for="toggle" value="Password:"/><br/>
+                    <p:password id="toggle" toggleMask="true" redisplay="false" required="true" WeakLabel="Weak" value="#{registerForm.registerUser.password}"/>
                 </div><br/>
-                <div class="form-group">
-                    <p:commandButton type="button" value="Sign in" icon="pi pi-check" iconPos="right"/>
-                </div>
-                <h5 >Already have an account!!!<h:outputLink value="LoginForm.xhtml">Sign In</h:outputLink> </h5>
+
+                <div class="form-group w-4 ml-8 justify-content-center">
+                    
+                    <p:commandButton value="Sign up" icon="pi pi-check" iconPos="right" action="#{registerForm.userRegister()}"/>
+                
+            </div>
+                <h5 >Already have an account!!!<p:link outcome="/pages/authentications/LoginForm.xhtml" value="Sign in"/></h5>
             </h:form>
         </div>
     </f:view>

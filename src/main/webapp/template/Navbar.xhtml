@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+>
+
+    <ui:composition>
+        <style>
+            /* Target the button text */
+            .ui-button-secondary .ui-button-text {
+                color: rgb(24, 172, 24)
+            }
+
+            /* Target the icon */
+            .ui-button-secondary .ui-button-icon-left,
+            .ui-button-secondary .ui-button-icon-right {
+                color: rgb(24, 172, 24);
+            }
+        </style>
+        <div class="flex block px-6 py-4 ">
+            <p:button type="button" value="Profile" styleClass="ui-button-secondary ui-button-flat" icon="pi pi-fw pi-home" outcome="#{navigation.profile}"/>
+        </div>
+        <div class="px-6 py-4 block">
+            <p:button type="button" value="Account" styleClass="ui-button-secondary ui-button-flat" icon="pi pi-fw pi-credit-card" outcome="#{navigation.account}"/>
+        </div>
+        <div class="px-6 py-4 block">
+            <p:button type="button" value="Transaction" styleClass="ui-button-secondary ui-button-flat" icon="pi pi-fw pi-wallet" outcome="#{navigation.transaction}"/>
+        </div>
+        <div class="px-6 py-4 block">
+            <p:button type="button" value="View Transactions" styleClass="ui-button-secondary ui-button-flat" icon="pi pi-fw pi-wallet" outcome="#{navigation.services}"/>
+        </div>
+        
+        <!-- <ul class="nav" >
+            <li><a href="/sacco/pages/dashboard/profile.xhtml">Profile</a></li>
+            <li><a href="/sacco/pages/dashboard/account.xhtml">Account</a></li>
+            <li><a href="/sacco/pages/dashboard/deposit.xhtml">Make Deposit</a></li>
+            <li><a href="/sacco/pages/dashboard/withdraw.xhtml">Make Withdraw</a></li>
+            <li><a href="/sacco/pages/dashboard/services.xhtml">Services</a></li>
+        </ul> -->
+    </ui:composition>
+
+</html>

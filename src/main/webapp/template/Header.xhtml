@@ -6,47 +6,28 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core"
 >
-<h:head>
-    <style>
-        .header-card {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 50px;
-            background-color: #f9f9f9;
-            text-align: center;
-            padding: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
 
-        .logo-image {
-            height: 30px;
-            width: 30px;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            left: 10px;
-        }
+<style>
+    .bg-green-500 {
+    background: green;
+    color: #fff;
+    border: 1px solid green;
+    border-radius: 4px;
+    transition: background-color .2s,color .2s,border-color .2s,box-shadow .2s,opacity .2s;
+    }
 
-        .login-button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            text-align: center;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            right: 10px;
-            text-decoration: none;
-            font-size: 14px;
-            cursor: pointer;
-        }
-    </style>
-</h:head>
+</style>
+
+
 
 <ui:composition>
-    
+    <div class="flex justify-content-between">
+        <p:graphicImage library="images" name="kimwanyi.png" alt="image not there" class="logo-image" style="width: 7rem; height: 5rem; display:flex" />
+        <div class="h-2 mr-2 mt-2">
+            <p:commandButton value="Log out" action="#{loginForm.logout()}" icon="pi pi-sign-out" class="bg-green-500" outcome="#{navigation.login}"/>
+        </div>
+        
+    </div>
 </ui:composition>
+
 </html>

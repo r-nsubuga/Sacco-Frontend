@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+
+<h:head>
+    <f:facet name="first">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+
+        <h:outputStylesheet name="primeflex/3.3.1/primeflex.css" library="webjars"/>
+        <h:outputStylesheet name="css/App.css"/>
+    </f:facet>
+    
+</h:head>
+
+<h:body>
+  <ui:composition template="/template/Template.xhtml">
+    <ui:define name="content">
+
+    <div class="flex ">
+          <h:form>
+            <p:dataTable
+              var="transaction"
+              value="#{transbean.transactions_list}"
+              rows="5"
+              paginator="true"
+              paginatorPosition="both"
+              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+              currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+              
+            >
+
+            <p:column headerText="ID" class="w-2">
+              <h:outputText value="#{transaction.transID}" />
+            </p:column> 
+
+              <p:column headerText="Amount">
+                <h:outputText value="#{transaction.amount}" />
+              </p:column>
+
+              <p:column headerText="Transaction Type">
+                <h:outputText value="#{transaction.transactionType}" />
+              </p:column>
+
+              
+
+            </p:dataTable>
+          </h:form>
+        </div>
+
+    </ui:define>
+  </ui:composition>
+</h:body>
+</html>

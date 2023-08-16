@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:p="http://primefaces.org/ui"
+  xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+  <h:head>
+    <f:facet name="first">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+      />
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+
+      <h:outputStylesheet
+        name="primeflex/3.3.1/primeflex.css"
+        library="webjars"
+      />
+    </f:facet>
+  </h:head>
+  <h:body>
+    <ui:composition template="/template/Template.xhtml">
+      <ui:define name="content">
+        <div class="mr-8 mt-2">
+          <div class="mr-8">
+            <div class="mr-8">
+              <div class="mr-8">
+                <div class="mr-8">
+                  <div class="mr-8">
+                    <h:panelGroup>
+                      <h:graphicImage
+                        library="images"
+                        name="profile.png"
+                        alt="profile"
+                        style="width: 50%; height: 50%"
+                      />
+                      <br />
+                      <h2>First Name:</h2><h:outputText value="#{transbean.getFName()}"/>
+                      <h2>Last Name:</h2><h:outputText value="#{transbean.getLName()}"/>
+                      
+                      <h2>Account Number:</h2><h:outputText value="#{transbean.getANumber()}"/>
+                    </h:panelGroup>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ui:define>
+    </ui:composition>
+  </h:body>
+</html>
