@@ -9,14 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-
 import java.security.SecureRandom;
 import org.pahappa.systems.kimanyisacco.models.Account;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.pahappa.systems.kimanyisacco.DAO.UserDAO;
+import org.pahappa.systems.kimanyisacco.constants.MemberStatus;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -25,43 +23,32 @@ import javax.mail.internet.MimeMessage;
 public class UserServiceImpl implements UserService {
     private final UserDAO userDAO = new UserDAO();
    
-    List<Member> use_list = new ArrayList<>();
+    List<Member> memberList = new ArrayList<>();
+    SecureRandom rand = new SecureRandom();
+    int upper =100000;
 
     @Override
-    public void authenticateUser(Member user) {
-        //get a list and use it to for the checks
-        use_list = userDAO.getUsers();
+    public void authenticateUser(Member member) {
 
-        SecureRandom rand = new SecureRandom();
-        int upper =1000;
+        memberList = userDAO.getUsers();
         Account random = new Account(("ACKS-" + ((Integer)rand.nextInt(upper))));
 
-        user.setAccount(random);
+        member.setAccount(random);
 
-        String password = BCrypt.hashpw(user.getPassword(),BCrypt.gensalt());
-        user.setPassword(password);
-
-
-        if(use_list.isEmpty()){
-            userDAO.save(user);
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", "User registered successfully");
-            FacesContext.getCurrentInstance().addMessage("myForm:messages", message);
+        if(memberList.isEmpty()){
+            String password = BCrypt.hashpw(member.getPassword(),BCrypt.gensalt());
+            member.setPassword(password);
+            member.setMemberStatus(MemberStatus.PENDING);
+            userDAO.save(member);
 
         }else{
-            for(Member use:use_list){
-                // System.out.println(use.getUsername());
-                // System.out.println(user.getUsername());
-             if(user.getUsername().equals(use.getUsername())){
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "username already exists!");
-                FacesContext.getCurrentInstance().addMessage("myForm:messages", message);
-
+            for(Member use:memberList){
+             if(member.getUsername().equals(use.getUsername())){
                 break;
             }
             else {
-                System.out.println(user.getUsername());
-                userDAO.save(user);
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", "User registered successfully");
-                FacesContext.getCurrentInstance().addMessage("myForm:messages", message);
+                System.out.println(member.getUsername());
+                userDAO.save(member);
                 break;
             }
         
@@ -69,31 +56,26 @@ public class UserServiceImpl implements UserService {
         }
        
     }
-   
 
-
-
-    public List<Member> getUsers() {
+    public List<Member> getMembers() {
         return userDAO.getUsers();
     }
-    public List<Member> getUsersToDisplay() {
-        return userDAO.getUsersToDisplay();
+    public List<Member> getMembersToDisplay() {
+        return userDAO.getMembersToDisplay();
     }
 
-    public List<Member> getUsersToVerify() {
-        return userDAO.getUsersToVerify();
+    public List<Member> getMembersToVerify() {
+        return userDAO.getMembersToVerify();
     }
 
     public void verifyAccount(int id){
-        userDAO.verifyStatus(id);
+        userDAO.changeStatusToVerified(id);
         Member email_member = userDAO.sendToMember(id);
         sendApprovalEmail(email_member.getEmail(), email_member.getLastName());
     }
 
     public void rejectAccount(int id){
-        userDAO.rejectStatus(id);
-        // Register email_member = userDAO.sendToMember(id);
-        // sendApprovalEmail(email_member.getEmail(), email_member.getLastName());
+        userDAO.changeStatusToRejected(id);
     }
 
     private void sendApprovalEmail(String recipientEmail, String lastName) {

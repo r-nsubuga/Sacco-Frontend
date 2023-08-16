@@ -5,8 +5,9 @@ import java.util.List;
 import org.mindrot.jbcrypt.BCrypt;
 import org.pahappa.systems.kimanyisacco.DAO.UserDAO;
 import org.pahappa.systems.kimanyisacco.models.Member;
+import org.pahappa.systems.kimanyisacco.services.LoginService;
 
-public class LoginServiceImpl {
+public class LoginServiceImpl implements LoginService {
     UserDAO userDAO = new UserDAO();
     Member logged_user;
 

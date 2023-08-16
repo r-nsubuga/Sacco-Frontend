@@ -2,7 +2,7 @@ package org.pahappa.systems.kimanyisacco.config;
 
 import org.pahappa.systems.kimanyisacco.models.Member;
 import org.pahappa.systems.kimanyisacco.models.Account;
-import org.pahappa.systems.kimanyisacco.models.Transactions;
+import org.pahappa.systems.kimanyisacco.models.Transaction;
 
 
 import org.hibernate.SessionFactory;
@@ -19,7 +19,7 @@ public class SessionConfiguration {
             //Add annotated classes here
             configuration.addAnnotatedClass(Member.class);
             configuration.addAnnotatedClass(Account.class);
-            configuration.addAnnotatedClass(Transactions.class);
+            configuration.addAnnotatedClass(Transaction.class);
 
             
             

@@ -7,24 +7,28 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import org.pahappa.systems.kimanyisacco.services.implement.UserServiceImpl;
+import org.pahappa.systems.kimanyisacco.constants.MemberStatus;
+import org.pahappa.systems.kimanyisacco.constants.TransactionStatus;
+import org.pahappa.systems.kimanyisacco.constants.TransactionType;
 import org.pahappa.systems.kimanyisacco.models.Account;
 import org.pahappa.systems.kimanyisacco.models.Member;
-import org.pahappa.systems.kimanyisacco.models.Transactions;
-import org.pahappa.systems.kimanyisacco.services.implement.TransactionImpl;
+import org.pahappa.systems.kimanyisacco.models.Transaction;
+import org.pahappa.systems.kimanyisacco.services.TransactionService;
+import org.pahappa.systems.kimanyisacco.services.implement.TransactionServiceImpl;
 
 
 @ManagedBean(name="adminBean")
 @ViewScoped
 public class AdminBean {
     private List<Member> members;
-    private List<Transactions> transactions;
+    private List<Transaction> transactions;
     private Member selectedMember;
 
     UserServiceImpl userService = new UserServiceImpl();
-    TransactionImpl transactionImpl = new TransactionImpl();
+    TransactionService transactionService = new TransactionServiceImpl();
 
     public List<Member> getMembers() {
-        members = userService.getUsersToVerify();
+        members = userService.getMembersToVerify();
         return members;
     }
     public void setMembers(List<Member> members) {
@@ -44,14 +48,14 @@ public class AdminBean {
     }
 
     //GET LIST OF WITHDRAWS TO APPROVE
-     public List<Transactions> getTransactions() {
-        transactions = transactionImpl.getWithdrawsToApprove();
+     public List<Transaction> getTransactions() {
+        transactions = transactionService.getWithdrawsToApprove();
         return transactions;
     }
     
-    List<Transactions> allTransactions = transactionImpl.getAllTransactions();
+    List<Transaction> allTransactions = transactionService.getAllTransactions();
 
-    public void setAllTransactions(List<Transactions> allTransactions) {
+    public void setAllTransactions(List<Transaction> allTransactions) {
         this.allTransactions = allTransactions;
     }
 
@@ -68,18 +72,18 @@ public class AdminBean {
 
     //WITHDRAW APPROVAL OR REJECTION
     public void approveWithdraw(int id){
-        transactionImpl.approveWithdraw(id);
+        transactionService.approveWithdraw(id);
     }
 
     public void rejectWithdraw(int id){
-        transactionImpl.rejectWithdraw(id);
+        transactionService.rejectWithdraw(id);
     }
 
     //ADMIN ACCOUNT CARD-DISPLAY
     public double getDeposits(){
         double totalDeposit = 0.0;
-        for(Transactions t1: allTransactions){
-            if(t1.getTransactionType().equals("DEPOSIT")){
+        for(Transaction t1: allTransactions){
+            if(t1.getTransactionType().equals(TransactionType.DEPOSIT)){
                 totalDeposit += t1.getAmount();
             }
         }
@@ -87,8 +91,8 @@ public class AdminBean {
     }
     public double getWithdraws(){
         double totalWithdraw = 0.0;
-        for(Transactions t1: allTransactions){
-            if(t1.getTransactionType().equals("WITHDRAW") && t1.getStatus()==1){
+        for(Transaction t1: allTransactions){
+            if(t1.getTransactionType().equals(TransactionType.WITHDRAW) && t1.getTransactionStatus().equals(TransactionStatus.APPROVED)){
                 totalWithdraw += t1.getAmount();
             }
         }
@@ -97,7 +101,7 @@ public class AdminBean {
 
     public double getTheBalance(){
         double balance = 0.0;
-        List<Account> accountBalance = transactionImpl.getTheBalance();
+        List<Account> accountBalance = transactionService.getTheBalance();
         for(Account ac:accountBalance){
             balance += ac.getBalance();
         }
@@ -106,8 +110,8 @@ public class AdminBean {
 
     public int getVerificationCount(){
         int counter = 0;
-        List<Member> users = userService.getUsersToVerify();
-        for (Member user:users ){
+        List<Member> listOfUsersToVerify = userService.getMembersToVerify();
+        for (Member member:listOfUsersToVerify ){
             counter ++;
         }
         return counter;
@@ -116,19 +120,19 @@ public class AdminBean {
 
     public int getApproveCount(){
         int counter = 0;
-        List<Transactions> withdrawsToApprove = transactionImpl.getWithdrawsToApprove();
-        for (Transactions transaction:withdrawsToApprove ){
+        List<Transaction> withdrawsToApprove = transactionService.getWithdrawsToApprove();
+        for (Transaction transaction:withdrawsToApprove ){
             counter ++;
         }
         return counter;
     }
 
     public int getSaccoCount(){
-        List<Member> saccoCount = userService.getUsers();
+        List<Member> saccoCount = userService.getMembers();
         int counter = 0;
 
         for(Member sacco: saccoCount){
-            if(sacco.getStatus() == 1){
+            if(sacco.getMemberStatus().equals(MemberStatus.APPROVED)){
                 counter++;
             }
             
@@ -138,19 +142,19 @@ public class AdminBean {
 
     //TABULATED DATA FOR THE ADMIN
     public List<Member> getAllMembers(){
-        List<Member> allMemberList = userService.getUsersToDisplay();
+        List<Member> allMemberList = userService.getMembersToDisplay();
         return allMemberList; 
     }
 
-    public List<Transactions> getAllTransactions(){
-        List<Transactions> adminDisplayTransaction = transactionImpl.getAllTransactions();
-        List<Transactions> put = new ArrayList<>();
-        for(Transactions transaction: adminDisplayTransaction){
-            if(transaction.getStatus()==1){
-                put.add(transaction);
+    public List<Transaction> getAllTransactions(){
+        List<Transaction> adminDisplayTransaction = transactionService.getAllTransactions();
+        List<Transaction> transactionsForAdmin = new ArrayList<>();
+        for(Transaction transaction: adminDisplayTransaction){
+            if(transaction.getTransactionStatus().equals(TransactionStatus.APPROVED)){
+                transactionsForAdmin.add(transaction);
             }
         }
-        return put;
+        return transactionsForAdmin;
     }
 
     

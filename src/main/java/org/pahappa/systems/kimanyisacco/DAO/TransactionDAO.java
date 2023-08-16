@@ -4,24 +4,26 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
+//import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+
 import org.pahappa.systems.kimanyisacco.config.SessionConfiguration;
 import org.pahappa.systems.kimanyisacco.models.Account;
-//import org.pahappa.systems.kimanyisacco.models.Register;
-import org.pahappa.systems.kimanyisacco.models.Transactions;
+import org.pahappa.systems.kimanyisacco.constants.TransactionStatus;
+import org.pahappa.systems.kimanyisacco.constants.TransactionType;
+import org.pahappa.systems.kimanyisacco.models.Transaction;
 
 public class TransactionDAO {
 
     Session session = SessionConfiguration.getSessionFactory().openSession();
 
-    public void makeTransaction(Transactions trans) {
-        Transaction transaction = null;
+    public void makeTransaction(Transaction memberTransactionInProcess) {
+        org.hibernate.Transaction transaction = null;
         //Session session = null;
         try{
             //Session session = SessionConfiguration.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            session.save(trans);
+            session.save(memberTransactionInProcess);
             transaction.commit();
         }
         catch(Exception e){
@@ -37,7 +39,7 @@ public class TransactionDAO {
     }
 
     public void addToAccount(Account account) {
-        Transaction transaction = null;
+        org.hibernate.Transaction transaction = null;
         try{
             session = SessionConfiguration.getSessionFactory().openSession();
             transaction = session.beginTransaction();
@@ -56,43 +58,43 @@ public class TransactionDAO {
         }
     }
 
-    public List<Transactions> getTransactions(){
+    public List<Transaction> getTransactions(){
         Session session = SessionConfiguration.getSessionFactory().openSession();
-        Criteria criteria =  session.createCriteria(Transactions.class);
-        criteria.add(Restrictions.eq("transactionType", "WITHDRAW"));
-        criteria.add(Restrictions.eq("status", 0));
+        Criteria criteria =  session.createCriteria(Transaction.class);
+        criteria.add(Restrictions.eq("transactionType", TransactionType.WITHDRAW));
+        criteria.add(Restrictions.eq("transactionStatus", TransactionStatus.PENDING));
         return criteria.list();
     }
 
-    public List<Transactions> getAllTransactions(){
+    public List<Transaction> getAllTransactions(){
         Session session = SessionConfiguration.getSessionFactory().openSession();
-        return session.createCriteria(Transactions.class).list();
+        return session.createCriteria(Transaction.class).list();
     }
 
-    public Transactions getWithdrawByID(Account accountNumber){
+    public Transaction getWithdrawByID(Account accountNumber){
         Session session = SessionConfiguration.getSessionFactory().openSession();
     
-        Criteria criteria = session.createCriteria(Transactions.class);
-        criteria.add(Restrictions.eq("accNumber", accountNumber));
-        criteria.add(Restrictions.eq("status", 0));
-        return (Transactions) criteria.uniqueResult();
+        Criteria criteria = session.createCriteria(Transaction.class);
+        criteria.add(Restrictions.eq("account", accountNumber));
+        criteria.add(Restrictions.eq("transactionStatus", TransactionStatus.PENDING));
+        return (Transaction) criteria.uniqueResult();
     }
 
-    public  List<Transactions> getByAccountID(Account account){
+    public  List<Transaction> getByAccountID(Account account){
         Session session = SessionConfiguration.getSessionFactory().openSession();
-        Criteria criteria = session.createCriteria(Transactions.class);
-        criteria.add(Restrictions.eq("accNumber", account));
-        criteria.add(Restrictions.eq("status", 1));
+        Criteria criteria = session.createCriteria(Transaction.class);
+        criteria.add(Restrictions.eq("account", account));
+        criteria.add(Restrictions.eq("transactionStatus", TransactionStatus.APPROVED));
         return criteria.list();
     }
 
     public boolean approveStatus(int id){
-        Transaction transaction = null;
+        org.hibernate.Transaction transaction = null;
         try{
             Session session = SessionConfiguration.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            Transactions withdrawTransactionForUser = (Transactions) session.get(Transactions.class, id);
-            withdrawTransactionForUser.setStatus(1);
+            Transaction withdrawTransactionForUser = (Transaction) session.get(Transaction.class, id);
+            withdrawTransactionForUser.setTransactionStatus(TransactionStatus.APPROVED);
             session.update(withdrawTransactionForUser);
             transaction.commit();
 
@@ -107,12 +109,12 @@ public class TransactionDAO {
     }
 
     public void rejectStatus(int id){
-        Transaction transaction = null;
+        org.hibernate.Transaction transaction = null;
         try{
             Session session = SessionConfiguration.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            Transactions withdrawTransactionForUser = (Transactions) session.get(Transactions.class, id);
-            withdrawTransactionForUser.setStatus(2);
+            Transaction withdrawTransactionForUser = (Transaction) session.get(Transaction.class, id);
+            withdrawTransactionForUser.setTransactionStatus(TransactionStatus.REJECTED);
             session.update(withdrawTransactionForUser);
             transaction.commit();
 
@@ -125,12 +127,12 @@ public class TransactionDAO {
         }
     }
 
-    public Transactions getTransactionByID(int id){
-        Transaction transaction = null;
+    public Transaction getTransactionByID(int id){
+        org.hibernate.Transaction transaction = null;
         
         Session session = SessionConfiguration.getSessionFactory().openSession();
         transaction = session.beginTransaction();
-        Transactions w_transaction = (Transactions) session.get(Transactions.class, id);
+        Transaction w_transaction = (Transaction) session.get(Transaction.class, id);
         transaction.commit();
         return w_transaction;
     

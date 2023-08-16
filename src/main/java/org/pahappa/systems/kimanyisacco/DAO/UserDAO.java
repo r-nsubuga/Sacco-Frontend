@@ -2,6 +2,7 @@ package org.pahappa.systems.kimanyisacco.DAO;
 
 import org.pahappa.systems.kimanyisacco.config.SessionConfiguration;
 import org.pahappa.systems.kimanyisacco.models.Member;
+import org.pahappa.systems.kimanyisacco.constants.MemberStatus;
 
 import java.util.List;
 
@@ -10,11 +11,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
-
-
-
 public class UserDAO {
-    //creating a Member object
     public void save(Member user) {
         Transaction transaction = null;
         try{
@@ -37,27 +34,27 @@ public class UserDAO {
         return session.createCriteria(Member.class).list();
     }
 
-    public List<Member> getUsersToDisplay(){
+    public List<Member> getMembersToDisplay(){
         Session session = SessionConfiguration.getSessionFactory().openSession();
         Criteria criteria = session.createCriteria(Member.class);
-        criteria.add(Restrictions.eq("status", 1));
+        criteria.add(Restrictions.eq("memberStatus", MemberStatus.APPROVED));
         return criteria.list();
     }
 
-    public List<Member> getUsersToVerify(){
+    public List<Member> getMembersToVerify(){
         Session session = SessionConfiguration.getSessionFactory().openSession();
         Criteria criteria = session.createCriteria(Member.class);
-        criteria.add(Restrictions.eq("status", 0));
+        criteria.add(Restrictions.eq("memberStatus",MemberStatus.PENDING));
         return criteria.list();
     }
 
-    public void verifyStatus(int id){
+    public void changeStatusToVerified(int id){
        Transaction transaction = null;
         try{
             Session session = SessionConfiguration.getSessionFactory().openSession();
             transaction = session.beginTransaction();
             Member v_user = (Member) session.get(Member.class, id);
-            v_user.setStatus(1);
+            v_user.setMemberStatus(MemberStatus.APPROVED);
             session.update(v_user);
             transaction.commit();
             
@@ -71,13 +68,13 @@ public class UserDAO {
 
     }
 
-    public void rejectStatus(int id){
+    public void changeStatusToRejected(int id){
        Transaction transaction = null;
         try{
             Session session = SessionConfiguration.getSessionFactory().openSession();
             transaction = session.beginTransaction();
             Member v_user = (Member) session.get(Member.class, id);
-            v_user.setStatus(2);
+            v_user.setMemberStatus(MemberStatus.REJECTED);
             session.update(v_user);
             transaction.commit();
             

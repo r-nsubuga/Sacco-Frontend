@@ -1,7 +1,8 @@
 package org.pahappa.systems.kimanyisacco.services;
 
+import org.pahappa.systems.kimanyisacco.models.Member;
 
 public interface LoginService {
-    boolean allowLogin(String username, String password);
-    //void putSession();
+    Member allowLogin(Member member);
+    
 }
