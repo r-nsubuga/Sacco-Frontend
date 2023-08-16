@@ -1,9 +1,9 @@
 package org.pahappa.systems.kimanyisacco.services.implement;
 
 import org.pahappa.systems.kimanyisacco.services.UserService;
-import org.pahappa.systems.kimanyisacco.models.Register;
+import org.pahappa.systems.kimanyisacco.models.Member;
 
-import java.io.IOException;
+
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,10 +14,9 @@ import javax.faces.context.FacesContext;
 
 import java.security.SecureRandom;
 import org.pahappa.systems.kimanyisacco.models.Account;
-//import org.hibernate.Session;
+
 import org.mindrot.jbcrypt.BCrypt;
 import org.pahappa.systems.kimanyisacco.DAO.UserDAO;
-import org.pahappa.systems.kimanyisacco.controllers.Hyperlinks;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -25,17 +24,19 @@ import javax.mail.internet.MimeMessage;
 
 public class UserServiceImpl implements UserService {
     private final UserDAO userDAO = new UserDAO();
-    
+   
+    List<Member> use_list = new ArrayList<>();
+
     @Override
-    public void authenticateUser(Register user) {
-        List<Register> use_list = new ArrayList<>();
+    public void authenticateUser(Member user) {
+        //get a list and use it to for the checks
         use_list = userDAO.getUsers();
 
         SecureRandom rand = new SecureRandom();
         int upper =1000;
         Account random = new Account(("ACKS-" + ((Integer)rand.nextInt(upper))));
 
-        user.setAccountNumber(random);
+        user.setAccount(random);
 
         String password = BCrypt.hashpw(user.getPassword(),BCrypt.gensalt());
         user.setPassword(password);
@@ -47,20 +48,13 @@ public class UserServiceImpl implements UserService {
             FacesContext.getCurrentInstance().addMessage("myForm:messages", message);
 
         }else{
-            for(Register use:use_list){
-                System.out.println(use.getUsername());
-                System.out.println(user.getUsername());
+            for(Member use:use_list){
+                // System.out.println(use.getUsername());
+                // System.out.println(user.getUsername());
              if(user.getUsername().equals(use.getUsername())){
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "username already exists!");
                 FacesContext.getCurrentInstance().addMessage("myForm:messages", message);
 
-                String base_url = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
-                try {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(base_url + Hyperlinks.register);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-    
                 break;
             }
             else {
@@ -75,19 +69,31 @@ public class UserServiceImpl implements UserService {
         }
        
     }
+   
 
-    public List<Register> getUsers() {
+
+
+    public List<Member> getUsers() {
         return userDAO.getUsers();
     }
+    public List<Member> getUsersToDisplay() {
+        return userDAO.getUsersToDisplay();
+    }
 
-    public List<Register> getUsersToVerify() {
+    public List<Member> getUsersToVerify() {
         return userDAO.getUsersToVerify();
     }
 
     public void verifyAccount(int id){
         userDAO.verifyStatus(id);
-        Register email_member = userDAO.sendToMember(id);
+        Member email_member = userDAO.sendToMember(id);
         sendApprovalEmail(email_member.getEmail(), email_member.getLastName());
+    }
+
+    public void rejectAccount(int id){
+        userDAO.rejectStatus(id);
+        // Register email_member = userDAO.sendToMember(id);
+        // sendApprovalEmail(email_member.getEmail(), email_member.getLastName());
     }
 
     private void sendApprovalEmail(String recipientEmail, String lastName) {

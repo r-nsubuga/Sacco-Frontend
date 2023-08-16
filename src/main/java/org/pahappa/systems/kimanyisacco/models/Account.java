@@ -1,24 +1,20 @@
 package org.pahappa.systems.kimanyisacco.models;
 
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import org.pahappa.systems.kimanyisacco.models.Transactions;
-import org.pahappa.systems.kimanyisacco.models.Register;
+
+import org.pahappa.systems.kimanyisacco.models.Member;
 
 @Entity
 @Table(name="accounts")
 public class Account {
 
     private  String accountNumber;
-    private Set<Transactions> transactions; 
     private int balance;
-    private Register owner;
+    private Member owner;
 
    
     @Id
@@ -30,14 +26,6 @@ public class Account {
         this.accountNumber = accountNumber;
     }
 
-    // @OneToMany(mappedBy = "accNumber")
-    // public Set<Transactions> getTransactions() {
-    //     return transactions;
-    // }
-    // public void setTransactions(Set<Transactions> transactions) {
-    //     this.transactions = transactions;
-    // }
-
     @Column(name="balance", columnDefinition = "integer default 0")
     public int getBalance() {
         return balance;
@@ -46,11 +34,11 @@ public class Account {
         this.balance = balance;
     }
 
-    @OneToOne(mappedBy = "accountNumber")
-    public Register getOwner() {
+    @OneToOne(mappedBy = "account")
+    public Member getOwner() {
         return owner;
     }
-    public void setOwner(Register owner) {
+    public void setOwner(Member owner) {
         this.owner = owner;
     }
 

@@ -1,32 +1,31 @@
 package org.pahappa.systems.kimanyisacco.views.transactions;
 
-import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-//import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
-//import org.pahappa.systems.kimanyisacco.controllers.Hyperlinks;
+import org.pahappa.systems.kimanyisacco.constants.Gender;
 import org.pahappa.systems.kimanyisacco.models.Account;
 import org.pahappa.systems.kimanyisacco.models.Transactions;
-import org.pahappa.systems.kimanyisacco.models.Register;
+import org.pahappa.systems.kimanyisacco.models.Member;
 import org.pahappa.systems.kimanyisacco.services.implement.TransactionImpl;
 
-@ManagedBean(name="transbean")
-@ViewScoped
-public class transactionBean{
+@ManagedBean(name = "transbean")
+@SessionScoped
+public class transactionBean {
     private Transactions transactions;
-    private Account account;   
-    private Register currentUser;
+    private Account account;
+    private Member currentUser;
+    private Date systemTime;
 
     TransactionImpl transact = new TransactionImpl();
 
-    private List<Transactions> transactions_list; 
+    private List<Transactions> transactionsList;
 
     public Transactions getTransactions() {
         return transactions;
@@ -39,143 +38,165 @@ public class transactionBean{
     public Account getAccount() {
         return account;
     }
-    
+
     public void setAccount(Account account) {
         this.account = account;
     }
 
     public transactionBean() {
-        
         this.transactions = new Transactions();
-        
     }
 
-    public Register getCurrentUser() {
-        
+    public Date getSystemTime() {
+        return systemTime;
+    }
+
+    public void setSystemTime(Date systemTime) {
+        this.systemTime = systemTime;
+    }
+
+    public Member getCurrentUser() {
         FacesContext context = FacesContext.getCurrentInstance();
         ExternalContext externalContext = context.getExternalContext();
-        return (Register) externalContext.getSessionMap().get("LoggedUser");
+        return (Member) externalContext.getSessionMap().get("LoggedUser");
     }
-     public void setCurrentUser(Register currentUser) {
+
+    public void setCurrentUser(Member currentUser) {
         this.currentUser = currentUser;
     }
 
+    public void doDeposit() {
+        Member user = getCurrentUser();
+        this.systemTime = new Date();
+        this.account = user.getAccount();
 
-    public void doDeposit(){
-        Register user = getCurrentUser();
-       
-        this.account = user.getAccountNumber(); 
-        
-        this.transactions.setAccNumber(this.account);
-        transact.makeDeposit(this.transactions);
+        if (this.transactions.getAmount() >= 202) {
+            this.transactions.setAccount(this.account);
+            this.transactions.setTransactionDate(this.systemTime);
+            transact.makeDeposit(this.transactions);
+            this.account.setBalance(this.account.getBalance() + this.transactions.getAmount());
+            transact.addToAccount(this.account);
 
-        this.account.setBalance(this.account.getBalance() + this.transactions.getAmount());
-        transact.addToAccount(this.account);
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Deposit successful", "Success"));
+        } else {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Enter valid value, Cannot deposit less than 210", "Failure"));
+        }
 
-        FacesContext.getCurrentInstance().addMessage(null,
-        new FacesMessage(FacesMessage.SEVERITY_INFO,"Deposit successful","Success"));
-        
-     }
-    
-    public void doWithdraw(){
-        Register user = getCurrentUser();
+    }
+
+    public void doWithdraw() {
+        Member user = getCurrentUser();
         System.out.println(user.getUsername());
-        System.out.println(user.getAccountNumber().getAccountNumber());
+        System.out.println(user.getAccount().getAccountNumber());
 
-        this.account = user.getAccountNumber(); 
+        this.systemTime = new Date();
+
+        this.account = user.getAccount();
         System.out.println(account.getAccountNumber());
-        this.transactions.setAccNumber(this.account);
+        this.transactions.setAccount(this.account);
+
+        this.transactions.setTransactionDate(this.systemTime);
 
         System.out.println(this.account.getBalance());
         System.out.println(this.transactions.getAmount());
-        if(this.transactions.getAmount() >= 0){
-        if(this.transactions.getAmount() < (this.account.getBalance()-2)){
-            transact.makeWithdraw(this.transactions); 
-        
+
+        Transactions withdraw_user = transact.unapprovedWithdraw(this.transactions.getAccount());
+
+        if (withdraw_user==null) {
+            System.out.println("Iam a null operation");
+            if (this.transactions.getAmount() >= 200) {
+                if (this.transactions.getAmount() < (this.account.getBalance() - 2)) {
+                    transact.makeWithdraw(this.transactions);
+
+                    FacesContext.getCurrentInstance().addMessage(null,
+                            new FacesMessage(FacesMessage.SEVERITY_INFO, "Request sent, Wait for approval email",
+                                    "Success"));
+                } else {
+                    FacesContext.getCurrentInstance().addMessage(null,
+                            new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                                    "Insufficient balance, withdraw smaller amount",
+                                    "Failed"));
+                }
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null,
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Incorrect value, can't withdraw less than 200", "Failed"));
+            }
+        } else {
             FacesContext.getCurrentInstance().addMessage(null,
-            new FacesMessage(FacesMessage.SEVERITY_INFO, "Request sent, Wait for approval email", "Success"));
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "wait for pending withdraw to be approved",
+                            "Failed"));
         }
-        else {
-           FacesContext.getCurrentInstance().addMessage(null,
-            new FacesMessage(FacesMessage.SEVERITY_ERROR, "Insufficient balance, withdraw smaller amount","Failed")); 
-        }
-    }else {
-        FacesContext.getCurrentInstance().addMessage(null,
-            new FacesMessage(FacesMessage.SEVERITY_ERROR, "Incorrect value, put correct amount","Failed")); 
-    }
-        
-    }
-    
-    public List<Transactions> getTransactions_list() {
-        Register user = getCurrentUser();
-        this.account = user.getAccountNumber();
-        transactions_list = transact.getList(this.account);
-        System.out.println(transactions_list);
-        return transactions_list;
-    }
-
-    public void setTransactions_list(List<Transactions> transactions_list) {
-        this.transactions_list = transactions_list;
-    }
-
-
-    public double getUserInfo(){
-        Register user2 = getCurrentUser();
-        this.account = user2.getAccountNumber();
-        double user_balance = this.account.getBalance();
-        return user_balance;
 
     }
 
-    public double getUserDeposit(){
-        Register user3 = getCurrentUser();
-        this.account = user3.getAccountNumber();
-        
-        transactions_list = transact.getList(this.account);
+    public List<Transactions> getTransactionsList() {
+        Member user = getCurrentUser();
+        this.account = user.getAccount();
+        transactionsList = transact.getList(this.account);
+        System.out.println(transactionsList);
+        return transactionsList;
+    }
+
+    public void setTransactionsList(List<Transactions> transactionsList) {
+        this.transactionsList = transactionsList;
+    }
+
+    public double getUserInfo() {
+        Member user = getCurrentUser();
+        this.account = user.getAccount();
+        double userBalance = this.account.getBalance();
+        return userBalance;
+
+    }
+
+    public double getUserDeposit() {
+        Member user = getCurrentUser();
+        this.account = user.getAccount();
+
+        transactionsList = transact.getList(this.account);
         int sum = 0;
-        for(Transactions item:transactions_list){
-            if(item.getTransactionType().equals("DEPOSIT")){
+        for (Transactions item : transactionsList) {
+            if (item.getTransactionType().equals("DEPOSIT")) {
                 sum += item.getAmount();
             }
         }
         return sum;
-        
+
     }
 
-    public double getUserWithdraw(){
-        Register user3 = getCurrentUser();
-        this.account = user3.getAccountNumber();
-        
-        transactions_list = transact.getList(this.account);
+    public double getUserWithdraw() {
+        Member user = getCurrentUser();
+        this.account = user.getAccount();
+
+        transactionsList = transact.getList(this.account);
         int sum = 0;
-        for(Transactions item:transactions_list){
-            if(item.getTransactionType().equals("WITHDRAW") && item.getStatus() == 1){
+        for (Transactions item : transactionsList) {
+            if (item.getTransactionType().equals("WITHDRAW") && item.getStatus() == 1) {
                 sum += item.getAmount();
             }
         }
         return sum;
-        
+
     }
 
-    public String getFName(){
-         Register user4 = getCurrentUser();
-         String fname = user4.getFirstName();
-         return fname;
+    public String getFName() {
+        Member user = getCurrentUser();
+        String fname = user.getFirstName();
+        return fname;
     }
-    public String getLName(){
-         Register user4 = getCurrentUser();
-         String lname = user4.getLastName();
-         return lname;
+
+    public String getLName() {
+        Member user = getCurrentUser();
+        String lname = user.getLastName();
+        return lname;
     }
-    public String getGen(){
-         Register user4 = getCurrentUser();
-         String gender = user4.getGender();
-         return gender;
+
+    public String getMemberAccountNumber() {
+        Member user = getCurrentUser();
+        String ac_number = user.getAccount().getAccountNumber();
+        return ac_number;
     }
-    public String getANumber(){
-         Register user4 = getCurrentUser();
-         String ac_number  = user4.getAccountNumber().getAccountNumber();
-         return ac_number;
-    }
-    
+
 }

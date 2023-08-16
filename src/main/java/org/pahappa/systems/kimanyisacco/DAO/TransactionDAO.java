@@ -8,14 +8,14 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.pahappa.systems.kimanyisacco.config.SessionConfiguration;
 import org.pahappa.systems.kimanyisacco.models.Account;
-import org.pahappa.systems.kimanyisacco.models.Register;
+//import org.pahappa.systems.kimanyisacco.models.Register;
 import org.pahappa.systems.kimanyisacco.models.Transactions;
 
 public class TransactionDAO {
 
     Session session = SessionConfiguration.getSessionFactory().openSession();
 
-    public void makeDeposit(Transactions trans) {
+    public void makeTransaction(Transactions trans) {
         Transaction transaction = null;
         //Session session = null;
         try{
@@ -69,6 +69,15 @@ public class TransactionDAO {
         return session.createCriteria(Transactions.class).list();
     }
 
+    public Transactions getWithdrawByID(Account accountNumber){
+        Session session = SessionConfiguration.getSessionFactory().openSession();
+    
+        Criteria criteria = session.createCriteria(Transactions.class);
+        criteria.add(Restrictions.eq("accNumber", accountNumber));
+        criteria.add(Restrictions.eq("status", 0));
+        return (Transactions) criteria.uniqueResult();
+    }
+
     public  List<Transactions> getByAccountID(Account account){
         Session session = SessionConfiguration.getSessionFactory().openSession();
         Criteria criteria = session.createCriteria(Transactions.class);
@@ -82,9 +91,9 @@ public class TransactionDAO {
         try{
             Session session = SessionConfiguration.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            Transactions w_user = (Transactions) session.get(Transactions.class, id);
-            w_user.setStatus(1);
-            session.update(w_user);
+            Transactions withdrawTransactionForUser = (Transactions) session.get(Transactions.class, id);
+            withdrawTransactionForUser.setStatus(1);
+            session.update(withdrawTransactionForUser);
             transaction.commit();
 
         }
@@ -95,6 +104,25 @@ public class TransactionDAO {
             e.printStackTrace();
         }
         return true;
+    }
+
+    public void rejectStatus(int id){
+        Transaction transaction = null;
+        try{
+            Session session = SessionConfiguration.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            Transactions withdrawTransactionForUser = (Transactions) session.get(Transactions.class, id);
+            withdrawTransactionForUser.setStatus(2);
+            session.update(withdrawTransactionForUser);
+            transaction.commit();
+
+        }
+        catch(Exception e){
+            if(transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
     }
 
     public Transactions getTransactionByID(int id){
