@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+>
+
+<h:head>
+    <style>
+        .logo-image {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 100px;
+            height: 100px; 
+        }
+    </style>
+    <f:facet name="first">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+
+        <h:outputStylesheet name="primeflex/3.3.1/primeflex.css" library="webjars"/>
+        <h:outputStylesheet library="css" name="App.css"/>
+    </f:facet>
+</h:head>
+<h:body style="display: flex; justify-content: center; align-items: center; background-color:ghostwhite;">
+    
+    <f:view>
+        <div class="card" style="width: 400px; border: 1px solid #ccc; border-radius: 4px; padding: 10px; text-align: center; background-color:azure">
+            <h1>Kimwanyi SACCO</h1>
+            <h:graphicImage url="/resources/images/kimwanyilogo.png" class="logo-image"/>
+            <h:form>
+                
+                <h3> REGISTER </h3>
+                <div class="form-group">
+                    <p:outputLabel for="float-fname" value="Firstname:"/><br/>
+                    <p:inputText id="float-fname" />
+                </div>
+                <div class="form-group">
+                    <p:outputLabel for="float-lname" value="Lastname:"/><br/>
+                    <p:inputText id="float-lname" />
+                </div>
+                <div class="form-group">
+                    <p:outputLabel for="float-input" value="Username:"/><br/>
+                    <p:inputText id="float-input" required="true"/>
+                </div>
+                    <p:outputLabel value="Gender:"/><br/>
+                    <p:selectOneMenu id="option" value="#{selectOneMenuView.selectedOption}">
+                    <f:selectItem itemLabel="Select One" itemValue=""/>
+                    <f:selectItem itemLabel="Male" itemValue="Male"/>
+                    <f:selectItem itemLabel="Female" itemValue="Female"/>
+                    <f:facet name="footer">
+                        <p:divider styleClass="mt-0" />
+                        <h:outputText value="2 options" style="font-weight:bold;"/>
+                    </f:facet>
+                </p:selectOneMenu>
+                    
+                <div class="form-group">
+                    <p:outputLabel for="float-email" value="Email:"/><br/>
+                    <p:inputText id="float-email" required="true"/>
+                </div>
+                <div class="form-group">
+                    <p:outputLabel for="toggle-p" value="Password:"/><br/>
+                    <p:password id="toggle-p" toggleMask="true" redisplay="false" required="true" feedback="true"/>
+                </div>
+                <div class="form-group">
+                    <p:outputLabel for="toggle" value="Confirm Password:"/><br/>
+                    <p:password id="toggle" toggleMask="true" redisplay="false" required="true" feedback="true"/>
+                </div><br/>
+                <div class="form-group">
+                    <p:commandButton type="button" value="Sign in" icon="pi pi-check" iconPos="right"/>
+                </div>
+                <h5 >Already have an account!!!<h:outputLink value="LoginForm.xhtml">Sign In</h:outputLink> </h5>
+            </h:form>
+        </div>
+    </f:view>
+    
+</h:body>
+
+
+
+</html>
