@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:p="http://primefaces.org/ui"
+  xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+  <h:head>
+    <f:facet name="first">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+      />
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+
+      <h:outputStylesheet
+        name="primeflex/3.3.1/primeflex.css"
+        library="webjars"
+      />
+    </f:facet>
+  </h:head>
+  <h:body>
+    <ui:composition template="/template/Template.xhtml">
+      <ui:define name="nav">
+        <style>
+          /* Target the button text */
+          .ui-button-secondary .ui-button-text {
+            color: green;
+          }
+
+          /* Target the icon */
+          .ui-button-secondary .ui-button-icon-left,
+          .ui-button-secondary .ui-button-icon-right {
+            color: green;
+          }
+        </style>
+        <div>
+          <div class="px-4 py-2 block w-4">
+            <p:button
+              type="button"
+              value="Home"
+              styleClass="ui-button-secondary ui-button-flat"
+              icon="pi pi-fw pi-home"
+              outcome="#{navigation.adminDash}"
+            />
+          </div>
+          <div class="px-4 py-2 block w-4">
+            <p:button
+              type="button"
+              value="Verify Members"
+              styleClass="ui-button-secondary ui-button-flat"
+              icon="pi pi-fw pi-credit-card"
+              outcome="#{navigation.adminVerify}"
+            />
+          </div>
+          <div class="px-4 py-2 block w-4">
+            <p:button
+              type="button"
+              value="Approve Withdraws"
+              styleClass="ui-button-secondary ui-button-flat"
+              icon="pi pi-fw pi-wallet"
+              outcome="#{navigation.adminApprove}"
+            />
+          </div>
+          <div class="px-4 py-2 block w-4">
+            <p:button
+              type="button"
+              value="View Members"
+              styleClass="ui-button-secondary ui-button-flat"
+              icon="pi pi-fw pi-wallet"
+              outcome="#{navigation.adminMembers}"
+            />
+          </div>
+          <div class="px-4 py-2 block w-4">
+            <p:button
+              type="button"
+              value="View Transactions"
+              styleClass="ui-button-secondary ui-button-flat"
+              icon="pi pi-fw pi-wallet"
+              outcome="#{navigation.adminTransactions}"
+            />
+          </div>
+          <div class="px-4 py-2 block w-4">
+            <p:button
+              type="button"
+              value="Reports"
+              styleClass="ui-button-secondary ui-button-flat"
+              icon="pi pi-fw pi-wallet"
+              outcome="#{navigation.adminReport}"
+            />
+          </div>
+        </div>
+      </ui:define>
+      <ui:define name="content">
+        <div>
+          <div class="block mr-6 p-md-6 p-lg-4">
+            <div class="flex gap-2">
+              <div class="mt-4 p-md-6 p-lg-4">
+                <p:card style="width: 10rem; margin-bottom: 2em">
+                  <f:facet name="title"
+                    ><div style="color: rgb(24, 172, 24)">
+                      For Verification
+                    </div></f:facet
+                  >
+                  <h:outputText
+                    value="#{adminBean.getVerificationCount()}"
+                    style="line-height: 1.5; margin: 0"
+                  />
+                </p:card>
+              </div>
+              <div class="mt-4 p-md-6 p-lg-4">
+                <p:card style="width: 10rem; margin-bottom: 2em">
+                  <f:facet name="title"
+                    ><div style="color: rgb(24, 172, 24)">
+                      For Withdraw
+                    </div></f:facet
+                  >
+                  <h:outputText
+                    value="#{adminBean.getApproveCount()}"
+                    style="line-height: 1.5; margin: 0"
+                  />
+                </p:card>
+              </div>
+              <div class="mt-4 p-md-6 p-lg-4">
+                <p:card style="width: 10rem; margin-bottom: 2em">
+                  <f:facet name="title"
+                    ><div style="color: rgb(24, 172, 24)">
+                      SACCO Members
+                    </div></f:facet
+                  >
+                  <h:outputText
+                    value="#{adminBean.getSaccoCount()}"
+                    style="line-height: 1.5; margin: 0"
+                  />
+                </p:card>
+              </div>
+            </div>
+          </div>
+          <div class="block mr-6 p-md-6 p-lg-4">
+            <div class="flex gap-2">
+              <div class="mt-4 p-md-6 p-lg-4">
+                <p:card style="width: 10rem; margin-bottom: 2em">
+                  <f:facet name="title"
+                    ><div style="color: rgb(24, 172, 24)">Deposits</div>
+                  </f:facet>
+                  <h:outputText
+                    value="#{adminBean.getDeposits()}"
+                    style="line-height: 1.5; margin: 0"
+                  />
+                </p:card>
+              </div>
+              <div class="mt-4 p-md-6 p-lg-4">
+                <p:card style="width: 10rem; margin-bottom: 2em">
+                  <f:facet name="title">
+                    <div style="color: rgb(24, 172, 24)">
+                      Withdraws
+                    </div></f:facet
+                  >
+                  <h:outputText
+                    value="#{adminBean.getWithdraws()}"
+                    style="line-height: 1.5; margin: 0"
+                  />
+                </p:card>
+              </div>
+              <div class="mt-4 p-md-6 p-lg-4">
+                <p:card style="width: 10rem; margin-bottom: 2em">
+                  <f:facet name="title"
+                    ><div style="color: rgb(24, 172, 24)">Balance</div></f:facet
+                  >
+                  <h:outputText
+                    value="#{adminBean.getTheBalance()}"
+                    style="line-height: 1.5; margin: 0"
+                  />
+                </p:card>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ui:define>
+    </ui:composition>
+  </h:body>
+</html>

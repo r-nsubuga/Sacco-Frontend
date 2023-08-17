@@ -1,0 +1,149 @@
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:p="http://primefaces.org/ui"
+  xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+  <h:head>
+    <f:facet name="first">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+      />
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+
+      <h:outputStylesheet
+        name="primeflex/3.3.1/primeflex.css"
+        library="webjars"
+      />
+      <h:outputStylesheet name="css/App.css" />
+    </f:facet>
+  </h:head>
+
+  <h:body>
+    <ui:composition template="/template/Template.xhtml">
+      <ui:define name="nav">
+        <style>
+          /* Target the button text */
+          .ui-button-secondary .ui-button-text {
+            color: green;
+          }
+
+          /* Target the icon */
+          .ui-button-secondary .ui-button-icon-left,
+          .ui-button-secondary .ui-button-icon-right {
+            color: green;
+          }
+        </style>
+        <div>
+          <div class="px-4 py-2 block w-4">
+            <p:button
+              type="button"
+              value="Home"
+              styleClass="ui-button-secondary ui-button-flat"
+              icon="pi pi-fw pi-home"
+              outcome="#{navigation.adminDash}"
+            />
+          </div>
+          <div class="px-4 py-2 block w-4">
+            <p:button
+              type="button"
+              value="Verify Members"
+              styleClass="ui-button-secondary ui-button-flat"
+              icon="pi pi-fw pi-credit-card"
+              outcome="#{navigation.adminVerify}"
+            />
+          </div>
+          <div class="px-4 py-2 block w-4">
+            <p:button
+              type="button"
+              value="Approve Withdraws"
+              styleClass="ui-button-secondary ui-button-flat"
+              icon="pi pi-fw pi-wallet"
+              outcome="#{navigation.adminApprove}"
+            />
+          </div>
+          <div class="px-4 py-2 block w-4">
+            <p:button
+              type="button"
+              value="View Members"
+              styleClass="ui-button-secondary ui-button-flat"
+              icon="pi pi-fw pi-wallet"
+              outcome="#{navigation.adminMembers}"
+            />
+          </div>
+          <div class="px-4 py-2 block w-4">
+            <p:button
+              type="button"
+              value="View Transactions"
+              styleClass="ui-button-secondary ui-button-flat"
+              icon="pi pi-fw pi-wallet"
+              outcome="#{navigation.adminTransactions}"
+            />
+          </div>
+          <div class="px-4 py-2 block w-4">
+            <p:button
+              type="button"
+              value="Reports"
+              styleClass="ui-button-secondary ui-button-flat"
+              icon="pi pi-fw pi-wallet"
+              outcome="#{navigation.adminReport}"
+            />
+          </div>
+        </div>
+      </ui:define>
+      <ui:define name="content">
+        <div class="flex">
+          <h:form>
+            <p:dataTable
+              var="transaction"
+              value="#{adminBean.getTransactions()}"
+              rows="10"
+              id="WdataTable"
+              paginator="true"
+              paginatorPosition="both"
+              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+              currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+              rowsPerPageTemplate="5,10,{ShowAll|'All'}"
+            >
+              <p:column headerText="Member">
+                <h:outputText value="#{transaction.account.owner.username}" />
+              </p:column>
+
+              <p:column headerText="Amount">
+                <h:outputText value="#{transaction.amount}" />
+              </p:column>
+
+              <p:column headerText="Status">
+                <h:outputText value="#{transaction.transactionStatus}" />
+              </p:column>
+
+              <p:column headerText="Approve">
+                <p:commandButton
+                  class="bg-green-600 p-button-rounded"
+                  value="Approve"
+                  action="#{adminBean.approveWithdraw(transaction.transactionID)}"
+                  onclick="return confirm('Are you sure you want to approve this withdraw request?')"
+                  update="WdataTable"
+                />
+              </p:column>
+
+              <p:column headerText="Reject">
+                <p:commandButton
+                  class="bg-red-600"
+                  value="Reject"
+                  action="#{adminBean.rejectWithdraw(transaction.transactionID)}"
+                  onclick="return confirm('Are you sure you want to reject this withdraw request?')"
+                  update="WdataTable"
+                />
+              </p:column>
+            </p:dataTable>
+          </h:form>
+        </div>
+      </ui:define>
+    </ui:composition>
+  </h:body>
+</html>
